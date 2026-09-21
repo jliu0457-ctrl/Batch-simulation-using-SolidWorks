@@ -1,0 +1,28 @@
+{
+  "protocol_id": "valve_geometry_only_v1",
+  "scope": "geometry_only",
+  "geometry": {
+    "protocol_id": "seven_variable_cad_v1",
+    "length_tolerance_mm": 0.001,
+    "angle_tolerance_deg": 1e-05,
+    "persisted_dimension_tolerance_SI": 1e-08,
+    "Dmax_interval_width_mm": 0.001,
+    "Dmax_acceptance": "entire_interval_within_target_plus_minus_length_tolerance",
+    "Dmax_method": "reopened_disc_projected_adaptive_caliper",
+    "axis_tolerance_mm": 0.001,
+    "axis_parallelism_tolerance": 1e-08,
+    "expected_external_parts": 14,
+    "expected_assemblies": 1,
+    "fixed_opening_deg": 45,
+    "fixed_endcap_parts": [
+      "封盖1.SLDPRT",
+      "封盖2.SLDPRT",
+      "封盖3.SLDPRT",
+      "封盖4.SLDPRT",
+      "封盖5.SLDPRT",
+      "封盖6.SLDPRT",
+      "封盖7.SLDPRT",
+      "封盖8.SLDPRT"
+    ]
+  }
+}

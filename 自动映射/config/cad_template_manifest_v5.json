@@ -1,0 +1,35 @@
+{
+    "template_id":  "sealed_flow_v5",
+    "created_utc":  "2026-09-15T09:44:11.1171618Z",
+    "source":  "C:\\Users\\liujunxiang\\Desktop\\流体仿真2",
+    "expected_assemblies":  1,
+    "expected_external_parts":  14,
+    "fixed_opening_deg":  45,
+    "fixed_endcap_parts":  [
+                               "封盖1.SLDPRT",
+                               "封盖2.SLDPRT",
+                               "封盖3.SLDPRT",
+                               "封盖4.SLDPRT",
+                               "封盖5.SLDPRT",
+                               "封盖6.SLDPRT",
+                               "封盖7.SLDPRT",
+                               "封盖8.SLDPRT"
+                           ],
+    "files":  {
+                  "8“D94R3Y-CL600C-00组装图.SLDASM":  "e0a148578cd5398da2b9f50bf7f108bb3a0a5000b40d05869bee08ef3f55db4f",
+                  "8“D94R3Y-CL600C-03阀体.SLDPRT":  "730b36c6a9b5be585c6e2ca9738febd71fed5be8c4280582b5ffdc06e5789a49",
+                  "8“D94R3Y-CL600C-04阀轴.SLDPRT":  "c8fd88d8777c3ea7daf4aac2eda7144f933fda984cbd1afcdeb8efd458d99fd0",
+                  "8“D94R3Y-CL600C-08大垫片.SLDPRT":  "e1819c17c8c8fec242cff5387e38db794046a628658ffaee0d672f0a32c0fda5",
+                  "8“D94R3Y-CL600C-09密封圈.SLDPRT":  "f342b6f4a654cf71e8dfddc4cda01237c8cb40a70dcc20820d650b7b2242ab3c",
+                  "8“D94R3Y-CL600C-10压板.SLDPRT":  "3adc3a921efed9fa389d882ed6948bfcdd19c19f9355a0c5dcfb7f658760ffab",
+                  "8“D94R3Y-CL600C-11蝶板.SLDPRT":  "dd47a0a2027f193e78fa07f051c2092e1b10989d2e6363e518e9aa562818e36a",
+                  "封盖1.SLDPRT":  "8eee059a4c6f79c881f1ca15d61f030ab4ce75e3baecf6fa28b761122024873c",
+                  "封盖2.SLDPRT":  "1df267b4564d90aa3da302cfbd0a4fcd8d6c3abe515a321be60a77395e045cb2",
+                  "封盖3.SLDPRT":  "ab67d0f29eb2bceb757d46c6a7f375a9584284fc5bb466277ac8130b0c96a654",
+                  "封盖4.SLDPRT":  "6d40675c7dab76bb79b58cf7fd4472998b9fccaf090280135273e4e80ec8921f",
+                  "封盖5.SLDPRT":  "801538ced06bed99957d3ffc28ef828f079e08a41cb397fbff02bbff6a8e6b2f",
+                  "封盖6.SLDPRT":  "22813f2ebad7e15f11ba7b1b62331a92ba85aa969a11ecc64e963dca1796b5e0",
+                  "封盖7.SLDPRT":  "34d766ac72f298ccc7b870f760d3cbc1877be0e38106ac13bded296372b930e8",
+                  "封盖8.SLDPRT":  "c55509af983c1386f3a977a798f12730c912262dbcb50360f0f9fc496d5e592d"
+              }
+}

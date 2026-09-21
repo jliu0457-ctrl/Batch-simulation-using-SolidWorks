@@ -1,0 +1,35 @@
+{
+ "template_id": "sealed_flow_capless_v6",
+ "created_local": "2026-09-17T10:19:01+08:00",
+ "source": "C:\\Users\\liujunxiang\\Desktop\\流体仿真2",
+ "expected_assemblies": 1,
+ "expected_external_parts": 6,
+ "parameterized_parts": [
+  "8“D94R3Y-CL600C-03阀体.SLDPRT",
+  "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+  "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+  "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+  "8“D94R3Y-CL600C-10压板.SLDPRT",
+  "8“D94R3Y-CL600C-11蝶板.SLDPRT"
+ ],
+ "fixed_opening_deg": 45,
+ "fixed_endcap_parts": [
+  "封盖1.SLDPRT",
+  "封盖2.SLDPRT",
+  "封盖3.SLDPRT",
+  "封盖4.SLDPRT"
+ ],
+ "files": {
+  "8“D94R3Y-CL600C-00组装图.SLDASM": "d8f78efd8299a5becc416416ecf7eb0065c397a955dfd2d9e0e1a40516b6f5c1",
+  "8“D94R3Y-CL600C-03阀体.SLDPRT": "730b36c6a9b5be585c6e2ca9738febd71fed5be8c4280582b5ffdc06e5789a49",
+  "8“D94R3Y-CL600C-04阀轴.SLDPRT": "c8fd88d8777c3ea7daf4aac2eda7144f933fda984cbd1afcdeb8efd458d99fd0",
+  "8“D94R3Y-CL600C-08大垫片.SLDPRT": "e1819c17c8c8fec242cff5387e38db794046a628658ffaee0d672f0a32c0fda5",
+  "8“D94R3Y-CL600C-09密封圈.SLDPRT": "f342b6f4a654cf71e8dfddc4cda01237c8cb40a70dcc20820d650b7b2242ab3c",
+  "8“D94R3Y-CL600C-10压板.SLDPRT": "3adc3a921efed9fa389d882ed6948bfcdd19c19f9355a0c5dcfb7f658760ffab",
+  "8“D94R3Y-CL600C-11蝶板.SLDPRT": "dd47a0a2027f193e78fa07f051c2092e1b10989d2e6363e518e9aa562818e36a"
+ },
+ "lock_policy": "锁定1/2/3/4 suppressed in the assembly as of 2026-09-19. A lock freezes the pair relative position but cannot stop the pair shapes changing when a driven dimension changes, which is what produced the measured overlaps; 锁定4 also over-defined the assembly and blocked the shaft-to-bore concentric mate.",
+ "shaft_concentric_mate": "同心54 (11蝶板 <-> 04阀轴) added 2026-09-19. Lock 4 must be suppressed first or AddMate5 returns swAddMateError_OverDefinedAssembly (5). With it the shaft follows the disc bore, so changing e or c no longer leaves the two axes delta-e apart (measured interference 1643.14 mm3 -> 0).",
+ "flow_project_policy": "No Flow project is stored in this template as of 2026-09-19. The adapter discards any inherited project on every run anyway; keeping one only meant a RemoveProject call that intermittently dies with RPC_E_DISCONNECTED and fails the whole run. Projects are rebuilt from the Flow installation template internal_water.fwp plus the boundary conditions and goals defined in code.",
+ "cap_policy": "The template carries NO endcaps as of 2026-09-19. The four caps used to exist only to be deleted on every run; with them came the failure mode where an inherited Flow project referencing the deleted caps raised a modal dialog. Six core parts plus the assembly is now the whole template, and Flow Create Lids builds the four lids on the capless output."
+}

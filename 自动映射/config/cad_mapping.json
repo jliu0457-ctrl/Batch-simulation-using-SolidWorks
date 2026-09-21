@@ -1,0 +1,670 @@
+{
+  "mapping_id": "seven_variable_physical_dmax_v2_1_adaptive",
+  "generated_utc": "2026-09-14T02:43:40.067792+00:00",
+  "status": "local_17_geometry_cases_verified",
+  "training_ready": false,
+  "geometry_suite_accepted": true,
+  "source_adapter": {
+    "path": "scripts/SevenVariableAdapter.cs",
+    "sha256": "d011a0cf84e9117371218ef30a75f14b081a060fc9c5f15b05378763c984efc0",
+    "methods": [
+      "SetBasic",
+      "SetConstruction",
+      "SolveConstruction",
+      "AdaptiveCaliper",
+      "MeasureCaliper",
+      "CaliperSelfTest"
+    ],
+    "version": "physical_dmax_v2_1_adaptive"
+  },
+  "template": {
+    "path": "working/assembly_repair_v4",
+    "solidworks_required": "2026",
+    "prog_id": "SldWorks.Application.34",
+    "assembly_config": "开度45°",
+    "opening_parameter": "D1@角度2",
+    "repair_report": "artifacts/assembly_repair.json",
+    "axis_sweep_verified_deg": [
+      0,
+      15,
+      45,
+      90
+    ],
+    "saved_reopen_angle_deg": 45
+  },
+  "input_order": [
+    "c_mm",
+    "e_mm",
+    "phi_deg",
+    "alpha_deg",
+    "Dmax_mm",
+    "bm_mm",
+    "ds_mm"
+  ],
+  "bindings": {
+    "c_mm": {
+      "meaning": "轴向偏心距：阀杆轴线到关闭密封中面的法向间距",
+      "input_unit": "mm",
+      "direct_targets": [
+        {
+          "part": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "part_token": "03阀体",
+          "parameter": "D2@草图3",
+          "adapter_expression": "d.c_mm / 1000",
+          "source_variable": "c_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "part_token": "08大垫片",
+          "parameter": "D10@草图1",
+          "adapter_expression": "d.c_mm / 1000",
+          "source_variable": "c_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "part_token": "09密封圈",
+          "parameter": "D3@草图1",
+          "adapter_expression": "d.c_mm / 1000",
+          "source_variable": "c_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "part_token": "10压板",
+          "parameter": "D2@草图1",
+          "adapter_expression": "d.c_mm / 1000",
+          "source_variable": "c_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "part_token": "11蝶板",
+          "parameter": "D2@草图1",
+          "adapter_expression": "d.c_mm / 1000",
+          "source_variable": "c_mm",
+          "native_unit": "m"
+        }
+      ],
+      "mode": "direct_driving_dimensions"
+    },
+    "e_mm": {
+      "meaning": "径向偏心距：阀杆轴线与流道轴线之间的偏置",
+      "input_unit": "mm",
+      "direct_targets": [
+        {
+          "part": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "part_token": "03阀体",
+          "parameter": "D30@草图4",
+          "adapter_expression": "d.e_mm / 1000",
+          "source_variable": "e_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "part_token": "03阀体",
+          "parameter": "D4@草图6",
+          "adapter_expression": "d.e_mm / 1000",
+          "source_variable": "e_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "part_token": "09密封圈",
+          "parameter": "D9@草图1",
+          "adapter_expression": "d.e_mm / 1000",
+          "source_variable": "e_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "part_token": "11蝶板",
+          "parameter": "D1@草图1",
+          "adapter_expression": "d.e_mm / 1000",
+          "source_variable": "e_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "part_token": "11蝶板",
+          "parameter": "D1@基准面2",
+          "adapter_expression": "d.e_mm / 1000",
+          "source_variable": "e_mm",
+          "native_unit": "m"
+        }
+      ],
+      "mode": "direct_driving_dimensions"
+    },
+    "phi_deg": {
+      "meaning": "偏心角",
+      "input_unit": "deg",
+      "direct_targets": [
+        {
+          "part": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "part_token": "03阀体",
+          "parameter": "D3@草图5",
+          "adapter_expression": "Radians(d.phi_deg)",
+          "source_variable": "phi_deg",
+          "native_unit": "rad"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "part_token": "08大垫片",
+          "parameter": "D5@草图1",
+          "adapter_expression": "Radians(d.phi_deg)",
+          "source_variable": "phi_deg",
+          "native_unit": "rad"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "part_token": "09密封圈",
+          "parameter": "D5@草图1",
+          "adapter_expression": "Radians(d.phi_deg)",
+          "source_variable": "phi_deg",
+          "native_unit": "rad"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "part_token": "10压板",
+          "parameter": "D4@草图1",
+          "adapter_expression": "Radians(d.phi_deg)",
+          "source_variable": "phi_deg",
+          "native_unit": "rad"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "part_token": "11蝶板",
+          "parameter": "D2@草图3",
+          "adapter_expression": "Radians(d.phi_deg)",
+          "source_variable": "phi_deg",
+          "native_unit": "rad"
+        }
+      ],
+      "mode": "direct_driving_dimensions",
+      "write_policy": "Only these five driving dimensions are written; all other dependent angles rebuild from constraints."
+    },
+    "alpha_deg": {
+      "meaning": "全锥角",
+      "input_unit": "deg",
+      "direct_targets": [
+        {
+          "part": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "part_token": "03阀体",
+          "parameter": "D2@草图5",
+          "adapter_expression": "Radians(d.alpha_deg / 2)",
+          "source_variable": "alpha_deg/2",
+          "native_unit": "rad"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "part_token": "08大垫片",
+          "parameter": "D7@草图1",
+          "adapter_expression": "Radians(d.alpha_deg)",
+          "source_variable": "alpha_deg",
+          "native_unit": "rad"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "part_token": "09密封圈",
+          "parameter": "D6@草图1",
+          "adapter_expression": "Radians(d.alpha_deg / 2)",
+          "source_variable": "alpha_deg/2",
+          "native_unit": "rad"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "part_token": "10压板",
+          "parameter": "D7@草图1",
+          "adapter_expression": "Radians(d.alpha_deg / 2)",
+          "source_variable": "alpha_deg/2",
+          "native_unit": "rad"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "part_token": "11蝶板",
+          "parameter": "D4@草图3",
+          "adapter_expression": "Radians(d.alpha_deg / 2)",
+          "source_variable": "alpha_deg/2",
+          "native_unit": "rad"
+        }
+      ],
+      "mode": "direct_driving_dimensions",
+      "stored_angle_policy": "08大垫片 stores full angle; 03阀体/09密封圈/10压板/11蝶板 store half angle."
+    },
+    "Dmax_mm": {
+      "meaning": "蝶板实体在关闭流道法平面上的最大卡尺直径",
+      "input_unit": "mm",
+      "direct_targets": [],
+      "mode": "inverse_from_physical_caliper",
+      "aliases": [
+        "Dmax",
+        "cone_base_d"
+      ],
+      "alias_policy": "Normalize exactly once to Dmax_mm; aliases are not additional design variables.",
+      "internal_variable": "s_mm"
+    },
+    "bm_mm": {
+      "meaning": "密封片轴向厚度",
+      "input_unit": "mm",
+      "direct_targets": [
+        {
+          "part": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "part_token": "09密封圈",
+          "parameter": "D2@草图1",
+          "adapter_expression": "d.bm_mm / 1000",
+          "source_variable": "bm_mm",
+          "native_unit": "m"
+        }
+      ],
+      "mode": "direct_driving_dimensions"
+    },
+    "ds_mm": {
+      "meaning": "阀杆工作段直径",
+      "input_unit": "mm",
+      "direct_targets": [
+        {
+          "part": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "part_token": "03阀体",
+          "parameter": "D25@草图4",
+          "adapter_expression": "d.ds_mm / 1000",
+          "source_variable": "ds_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "part_token": "04阀轴",
+          "parameter": "D4@草图1",
+          "adapter_expression": "d.ds_mm / 1000",
+          "source_variable": "ds_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "part_token": "09密封圈",
+          "parameter": "D8@草图1",
+          "adapter_expression": "d.ds_mm / 1000",
+          "source_variable": "ds_mm",
+          "native_unit": "m"
+        },
+        {
+          "part": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "part_token": "11蝶板",
+          "parameter": "D2@草图2",
+          "adapter_expression": "d.ds_mm / 1000",
+          "source_variable": "ds_mm",
+          "native_unit": "m"
+        }
+      ],
+      "mode": "direct_driving_dimensions"
+    }
+  },
+  "baseline": {
+    "design": {
+      "c_mm": 32,
+      "e_mm": 3.7,
+      "phi_deg": 8.250000000000018,
+      "alpha_deg": 35.500000000000085,
+      "Dmax_mm": 191.31786408589767,
+      "bm_mm": 7.5,
+      "ds_mm": 45
+    },
+    "source": "artifacts/seven_variable_mapping_full_geometry_v1.json",
+    "source_sha256": "e05108d0ef71cb5e94cdeab749099ea11408ddbb3c3730e2976c8e04deb900cf",
+    "acceptance": "artifacts/full_geometry_v1_acceptance.json",
+    "scope": "accepted adaptive full15 baseline template measurement",
+    "measurement_algorithm": "adaptive_periodic_interval_refinement",
+    "Dmax_caliper": {
+      "lower_mm": 191.31741389559275,
+      "upper_mm": 191.3183142762026,
+      "midpoint_mm": 191.31786408589767,
+      "band_mm": 0.0009003806098633049,
+      "step_deg": 11.25,
+      "peak_angle_deg": 0,
+      "directions": 58,
+      "support_calls": 116,
+      "peak_plus_point_m": [
+        -0.020938698257035312,
+        0.09508211979448176,
+        9.040835896453341e-18
+      ],
+      "peak_minus_point_m": [
+        -0.021820337788103227,
+        -0.09623529410111098,
+        -1.0436265076380935e-16
+      ],
+      "plane": "disc local yz; verified parallel to closed flow-normal plane",
+      "bound": "Adaptive periodic angular intervals: L=max sampled width; U=max_i(max(w(a_i),w(b_i))/cos((b_i-a_i)/2)) plus arithmetic padding. step_deg is the largest remaining interval, not a uniform spacing. CAD kernel support precision is additional."
+    },
+    "input_file": "config/design_baseline.json"
+  },
+  "internal_construction": {
+    "name": "s_mm",
+    "meaning": "锥面内部构造基圆直径，不是外部Dmax",
+    "baseline_mm": 194.37,
+    "is_optimization_variable": false,
+    "targets": [
+      {
+        "part": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+        "part_token": "03阀体",
+        "parameter": "D5@草图5",
+        "adapter_expression": "sMm / 1000",
+        "source_variable": "internal_s_mm",
+        "native_unit": "m"
+      },
+      {
+        "part": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+        "part_token": "08大垫片",
+        "parameter": "D6@草图1",
+        "adapter_expression": "sMm / 1000",
+        "source_variable": "internal_s_mm",
+        "native_unit": "m"
+      },
+      {
+        "part": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+        "part_token": "09密封圈",
+        "parameter": "D7@草图1",
+        "adapter_expression": "sMm / 1000",
+        "source_variable": "internal_s_mm",
+        "native_unit": "m"
+      },
+      {
+        "part": "8“D94R3Y-CL600C-10压板.SLDPRT",
+        "part_token": "10压板",
+        "parameter": "D5@草图1",
+        "adapter_expression": "sMm / 1000",
+        "source_variable": "internal_s_mm",
+        "native_unit": "m"
+      },
+      {
+        "part": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+        "part_token": "11蝶板",
+        "parameter": "D3@草图3",
+        "adapter_expression": "sMm / 1000",
+        "source_variable": "internal_s_mm",
+        "native_unit": "m"
+      }
+    ],
+    "fixed_radial_difference_mm": 1.575,
+    "difference_definition": "模板构造径向差 Δ；不是密封面法向间隙，也不是额外优化变量。",
+    "derived_radius_formula_mm": "s_mm/2 - 1.575",
+    "derived_gasket_diameter_formula_mm": "s_mm - 2*1.575",
+    "derived_targets": [
+      {
+        "part": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+        "part_token": "11蝶板",
+        "parameter": "D5@草图3",
+        "adapter_expression": "radial / 1000",
+        "source_variable": "derived_disc_cone_radius",
+        "native_unit": "m"
+      },
+      {
+        "part": "8“D94R3Y-CL600C-10压板.SLDPRT",
+        "part_token": "10压板",
+        "parameter": "D8@草图1",
+        "adapter_expression": "radial / 1000",
+        "source_variable": "derived_plate_cone_radius",
+        "native_unit": "m"
+      },
+      {
+        "part": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+        "part_token": "08大垫片",
+        "parameter": "D8@草图1",
+        "adapter_expression": "2 * radial / 1000",
+        "source_variable": "derived_gasket_cone_diameter",
+        "native_unit": "m"
+      }
+    ]
+  },
+  "Dmax_inverse": {
+    "definition": "Maximum caliper diameter of the disc solid projected onto the closed flow-normal plane.",
+    "local_plane": "disc local yz, with closed-state orientation checked against flow axis",
+    "support_api": "IBody2.GetExtremePoint over all disc solid bodies",
+    "bound_formula": "L=max sampled w; B_i=max(w(a_i),w(b_i))/cos((b_i-a_i)/2); U=max(L,max_i B_i)+1e-12*max(1,L)",
+    "caliper_band_mm_max": 0.001,
+    "target_tolerance_mm": 0.001,
+    "acceptance": "entire measured bound interval within [Dmax_target-0.001,Dmax_target+0.001] and interval width<=0.001",
+    "precision_scope": "adaptive angular discretization bound plus arithmetic padding; CAD kernel support precision remains additional",
+    "method": "bracket expansion then guarded secant/bisection using rebuilt solid caliper",
+    "repeat_policy": "After any change of any of the other six variables, re-solve s against the unchanged target Dmax; changing Dmax also re-solves s.",
+    "forbidden_substitutes": [
+      "approximate GetBodyBox/GetBox",
+      "cone construction circle",
+      "seal midplane ellipse major diameter"
+    ],
+    "angular_method": "adaptive_periodic_interval_refinement",
+    "initial_directions": 16,
+    "max_directions": 8192,
+    "sample_period_rad": "[0,pi), periodic at endpoints",
+    "refinement_policy": "Bisect the interval with largest B_i until U-L<=0.001 mm; fail if direction budget exhausted.",
+    "step_deg_meaning": "largest remaining angular interval; not uniform sampling spacing and not an independent acceptance limit",
+    "proof_scope": "The interval containing a true diameter-vector direction has an endpoint within half its gap; no smoothness or unimodality assumption is required."
+  },
+  "adapter_template_domain": [
+    "c_mm>=0",
+    "e_mm>=0",
+    "phi_deg>0",
+    "0<alpha_deg<180",
+    "phi_deg+alpha_deg/2<90",
+    "0<bm_mm<Dmax_mm",
+    "0<ds_mm<Dmax_mm"
+  ],
+  "domain_scope": "Current adapter/template guard only; not universal valve laws or approved optimization bounds.",
+  "units": {
+    "length_to_api": "mm/1000 -> m",
+    "angle_to_api": "deg*pi/180 -> rad"
+  },
+  "tolerances": {
+    "dimension_SI": 1e-08,
+    "geometry_mm": 0.001,
+    "axis_mm": 0.001,
+    "angle_deg": 1e-05
+  },
+  "geometry_tests": {
+    "baseline": 1,
+    "three_joint_geometry_only": 3,
+    "full": 15,
+    "full_perturbation_steps": {
+      "c_mm": 0.32,
+      "e_mm": 0.037,
+      "phi_deg": 0.1,
+      "alpha_deg": 0.1,
+      "Dmax_mm": 1.9131786408589768,
+      "bm_mm": 0.075,
+      "ds_mm": 0.45
+    }
+  },
+  "excluded_acceptance": [
+    "full_optimization_domain_coverage",
+    "full_motion_interference",
+    "training_dataset_readiness"
+  ],
+  "caliper_math_verification": {
+    "report": "artifacts/caliper_selftest_v2_1.json",
+    "report_sha256": "a0344d7b126f3f0e69586f727867f2e3b9c7c1a34700308ee205fac97020caff",
+    "source_sha256": "ea380e44ab2e18060ca2f83f6cb11ac23e18e88515785b8205b4ba89537a75e4",
+    "adapter_version": "physical_dmax_v2_1_adaptive",
+    "status": "all_math_tests_passed",
+    "test_count": 30,
+    "cad_executed": false,
+    "test_scope": "7 circle/ellipse cases and 23 finite-point hull cases including a line projection; analytic or pairwise-distance truth",
+    "max_band_mm": 0.0009830246860360603,
+    "queried_direction_range": [
+      26,
+      512
+    ],
+    "truth_comparison_roundoff_tolerance_mm": 1e-08
+  },
+  "historical_baseline_evidence": [
+    {
+      "design": {
+        "c_mm": 32,
+        "e_mm": 3.7,
+        "phi_deg": 8.250000000000018,
+        "alpha_deg": 35.500000000000085,
+        "Dmax_mm": 191.31764154689182,
+        "bm_mm": 7.5,
+        "ds_mm": 45
+      },
+      "source": "artifacts/seven_variable_mapping_baseline_smoke_v1.json",
+      "source_sha256": "8e9b795c46f39b9ee6dacf763975d39456396d82c6d148ecc36ce46e7fbccba0",
+      "scope": "measured_template_input_and_caliper_only; not a completed physical suite",
+      "source_completed_trials": 0,
+      "Dmax_caliper": {
+        "lower_mm": 191.31741389559275,
+        "upper_mm": 191.31786919819086,
+        "midpoint_mm": 191.31764154689182,
+        "band_mm": 0.00045530259811243923,
+        "step_deg": 0.25,
+        "peak_angle_deg": 0,
+        "directions": 720,
+        "support_calls": 1440,
+        "peak_plus_point_m": [
+          -0.020938698257035312,
+          0.09508211979448176,
+          9.040835896453341e-18
+        ],
+        "peak_minus_point_m": [
+          -0.021820337788103227,
+          -0.09623529410111098,
+          -1.0436265076380935e-16
+        ],
+        "plane": "disc local yz; verified parallel to closed flow-normal plane",
+        "bound": "W <= exact maximum caliper <= W / cos(step_rad / 2), subject to CAD kernel support precision"
+      },
+      "measurement_algorithm": "Historical baseline_smoke_v1 uniform support measurement, retained as baseline reference; adaptive suite has independent measured bounds."
+    }
+  ],
+  "geometry_acceptance": {
+    "status": "accepted_for_tested_local_17_cases",
+    "case_count": 17,
+    "full15": {
+      "report": "artifacts/full_geometry_v1_acceptance.json",
+      "report_sha256": "7cd5c3ac0b13e9e4b4578dee91d824108f0955bdfab1ef9b6fe530882f43f9cb",
+      "requested": 15,
+      "independently_verified": 15,
+      "accepted": true,
+      "executed_adapter_version": "physical_dmax_v2_adaptive",
+      "executed_adapter_source_archive": "artifacts/source_archive/SevenVariableAdapter_physical_dmax_v2_adaptive.cs.txt",
+      "executed_adapter_source_sha256": "ea7cf8fb6c156254244580b23acc1db6264f9ba56df4116ed1cebfe9e42119b5"
+    },
+    "joint2": {
+      "report": "artifacts/joint_geometry_v1_acceptance.json",
+      "report_sha256": "31dcc50be9de0b19cd62e0a931912cc4ba58d4783a63b1553d5eda39e23f5387",
+      "requested": 2,
+      "independently_verified": 2,
+      "accepted": true,
+      "executed_adapter_version": "physical_dmax_v2_1_adaptive",
+      "executed_adapter_source_sha256": "ea380e44ab2e18060ca2f83f6cb11ac23e18e88515785b8205b4ba89537a75e4",
+      "rows": [
+        {
+          "id": "joint_minus_v1",
+          "accepted": true,
+          "input": {
+            "c_mm": 31.84,
+            "e_mm": 3.68,
+            "phi_deg": 8.200000000000017,
+            "alpha_deg": 35.400000000000084,
+            "Dmax_mm": 190.36127476546815,
+            "bm_mm": 7.45,
+            "ds_mm": 44.9
+          },
+          "actual_six": {
+            "c_mm": 31.839999999999986,
+            "e_mm": 3.68,
+            "phi_deg": 8.199999999999585,
+            "alpha_deg": 35.400000000000134,
+            "bm_mm": 7.449999999999988,
+            "ds_mm": 44.9,
+            "reference": "reopened part-local analytic geometry; global closed assembly alignment was separately checked before saving"
+          },
+          "Dmax_interval_mm": [
+            190.36103243241075,
+            190.3619283120852
+          ],
+          "raw_report": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\seven_variable_trials\\joint_minus_v1\\mapping_result.json",
+          "raw_report_sha256": "12c967c5ac565f1608f638fd93bdd71c4a312342b91db570dfb3ec8ee381cdc3",
+          "adapter_source_sha256": "ea380e44ab2e18060ca2f83f6cb11ac23e18e88515785b8205b4ba89537a75e4",
+          "wrapper_source_sha256": "a4971bcc106675967c1c7208339b6973e2a57dd1e876d80220732c710eb90919",
+          "template_unchanged": true,
+          "command_state_restored": true,
+          "cad_bundle_files_verified": 9,
+          "run_dir": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\runs\\JOINT_MINUS\\geometry_joint_minus_v1",
+          "run_status": "geometry_verified"
+        },
+        {
+          "id": "joint_plus_v1",
+          "accepted": true,
+          "input": {
+            "c_mm": 32.16,
+            "e_mm": 3.72,
+            "phi_deg": 8.300000000000018,
+            "alpha_deg": 35.60000000000009,
+            "Dmax_mm": 192.27445340632713,
+            "bm_mm": 7.55,
+            "ds_mm": 45.1
+          },
+          "actual_six": {
+            "c_mm": 32.15999999999998,
+            "e_mm": 3.72,
+            "phi_deg": 8.299999999999633,
+            "alpha_deg": 35.60000000000016,
+            "bm_mm": 7.549999999999991,
+            "ds_mm": 45.1,
+            "reference": "reopened part-local analytic geometry; global closed assembly alignment was separately checked before saving"
+          },
+          "Dmax_interval_mm": [
+            192.2742061048016,
+            192.27511098827995
+          ],
+          "raw_report": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\seven_variable_trials\\joint_plus_v1\\mapping_result.json",
+          "raw_report_sha256": "f1e2742a304f058a5473821fd1c668e7e98016bb6baff7189a0cf32d6ebe746d",
+          "adapter_source_sha256": "ea380e44ab2e18060ca2f83f6cb11ac23e18e88515785b8205b4ba89537a75e4",
+          "wrapper_source_sha256": "a4971bcc106675967c1c7208339b6973e2a57dd1e876d80220732c710eb90919",
+          "template_unchanged": true,
+          "command_state_restored": true,
+          "cad_bundle_files_verified": 9,
+          "run_dir": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\runs\\JOINT_PLUS\\geometry_joint_plus_v1",
+          "run_status": "geometry_verified"
+        }
+      ]
+    },
+    "version_difference": "v2_1 computes final CAD hashes before marking completion and updates the adapter version; geometry mapping and caliper algorithms unchanged.",
+    "scope_limit": "These local cases do not prove full optimization-domain feasibility or full-motion noninterference.",
+    "training_ready": false
+  },
+  "geometry_run_registrations": [
+    {
+      "path": "runs/BASELINE/geometry_baseline_v1",
+      "status": "geometry_verified",
+      "design_id": "BASELINE",
+      "run_id": "geometry_baseline_v1",
+      "manifest_sha256": "cc00c7a930b65c4b78fa490ff14d688cd6e08cce6ec700ec22759c30d44c2abd",
+      "scope": "geometry_only"
+    },
+    {
+      "path": "runs/JOINT_MINUS/geometry_joint_minus_v1",
+      "status": "geometry_verified",
+      "design_id": "JOINT_MINUS",
+      "run_id": "geometry_joint_minus_v1",
+      "manifest_sha256": "b8db0b8c1ff7475f83494e238721685be277b4704650771b88c957846bc48128",
+      "scope": "geometry_only"
+    },
+    {
+      "path": "runs/JOINT_PLUS/geometry_joint_plus_v1",
+      "status": "geometry_verified",
+      "design_id": "JOINT_PLUS",
+      "run_id": "geometry_joint_plus_v1",
+      "manifest_sha256": "fb7f7550da329a487090d2918a1f180126eaefd1e1945d1bff10f0de6d009a74",
+      "scope": "geometry_only"
+    }
+  ],
+  "entry_points": {
+    "single_design": "scripts/Apply-SevenVariableDesign.ps1",
+    "baseline_input": "config/design_baseline.json",
+    "geometry_suite": "scripts/Test-SevenVariableMapping.ps1",
+    "runtime": "64-bit Windows PowerShell 5.1 with SolidWorks 2026",
+    "single_design_output": "working/seven_variable_trials/<RunName>/mapping_result.json",
+    "input_policy": "Exactly seven numeric canonical field names; aliases normalized before entry; no extra design columns."
+  }
+}

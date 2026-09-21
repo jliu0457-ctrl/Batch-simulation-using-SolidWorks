@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "contract_id": "valve_7x4_response_contract_v1",
+  "updated_date": "2026-09-14",
+  "implementation_status": "cad_geometry_and_registry_verified",
+  "automatic_training_dataset_ready": false,
+  "input_order": [
+    "c_mm",
+    "e_mm",
+    "phi_deg",
+    "alpha_deg",
+    "Dmax_mm",
+    "bm_mm",
+    "ds_mm"
+  ],
+  "inputs": {
+    "c_mm": {
+      "meaning": "轴向偏心距",
+      "unit": "mm"
+    },
+    "e_mm": {
+      "meaning": "径向偏心距",
+      "unit": "mm"
+    },
+    "phi_deg": {
+      "meaning": "偏心角",
+      "unit": "deg"
+    },
+    "alpha_deg": {
+      "meaning": "全锥角",
+      "unit": "deg",
+      "cad_half_angle_rule": "CAD 若采用半锥角，应显式 alpha_deg/2；不得假定与 phi 存在唯一映射"
+    },
+    "Dmax_mm": {
+      "meaning": "蝶板最大直径，等同本项目 cone_base_d",
+      "unit": "mm"
+    },
+    "bm_mm": {
+      "meaning": "密封片厚度",
+      "unit": "mm",
+      "not_equal_by_default": "计算书密封面接触宽度 b_M_mm"
+    },
+    "ds_mm": {
+      "meaning": "阀杆直径",
+      "unit": "mm"
+    }
+  },
+  "output_order": [
+    "T_peak_Nm",
+    "sigma_n_MPa",
+    "q_calc_MPa",
+    "Cv"
+  ],
+  "responses": {
+    "T_peak_Nm": {
+      "meaning": "规定工况集合中的启闭总扭矩峰值",
+      "unit": "N*m",
+      "source_type": "engineering_total_torque",
+      "computation": "torque_peak: M_m + M_h + M_C + M_T；Nmm/1000",
+      "required_definition": [
+        "case_set_id",
+        "expected_case_ids",
+        "peak_mode",
+        "同一材料分支",
+        "明示 L_mm 与液动力矩输入"
+      ],
+      "excludes": [
+        "单一 CFD 力矩Z直接当作总扭矩",
+        "自动加入执行器选型倍数",
+        "单工况自动宣称全启闭峰值"
+      ]
+    },
+    "sigma_n_MPa": {
+      "meaning": "密封副法向接触应力的协议指定统计量",
+      "unit": "MPa",
+      "source_type": "solid_contact",
+      "computation": "由真实密封副接触分析提取，Pa/1e6换算到MPa",
+      "extraction_protocol_status": "pending",
+      "required_definition": [
+        "contact study",
+        "接触对与统计区域",
+        "材料参数",
+        "关闭/预紧加载",
+        "摩擦",
+        "统计量与时间范围",
+        "网格/收敛检查"
+      ],
+      "excludes": [
+        "CFD表面静压力",
+        "仅名称包含法向压力的目标",
+        "未经标定的寿命循环数"
+      ]
+    },
+    "q_calc_MPa": {
+      "meaning": "计算书密封比压",
+      "unit": "MPa",
+      "source_type": "engineering_sealing_pressure",
+      "computation": "P_MPa*(D_MN_mm+b_M_mm)/(4*b_M_mm)+q_MF_MPa",
+      "required_definition": [
+        "material_branch",
+        "D_MN_mm",
+        "b_M_mm",
+        "P_MPa",
+        "q_allow_MPa"
+      ],
+      "excludes": [
+        "CFD密比压命名目标",
+        "FE压力与计算书压力无标记混合"
+      ]
+    },
+    "Cv": {
+      "meaning": "美制液体流量系数",
+      "unit": "US_Cv",
+      "source_type": "liquid_flow",
+      "computation": "(Q_m3_s*60/0.003785411784)*sqrt((rho_kg_m3/1000)/(delta_p_Pa/6894.757293168))",
+      "required_definition": [
+        "同次求解的Q/压差/密度",
+        "评价开度",
+        "取压面",
+        "液体适用条件",
+        "运行与几何对应"
+      ],
+      "excludes": [
+        "混合旧结果的流量和新结果的压力",
+        "以Dmax替代参考管道直径"
+      ]
+    }
+  },
+  "derived_engineering_inputs": [
+    "D_MN_mm",
+    "b_M_mm",
+    "L_mm",
+    "F_G_N",
+    "d_T_mm",
+    "b_T_mm"
+  ],
+  "quality": {
+    "missing_label_policy": "retain null plus failure reason; never fill zero",
+    "labels_published_only_after": [
+      "7变量CAD回读",
+      "独立几何测量",
+      "无干涉及流体域检查",
+      "重建后选面核对",
+      "新运行/几何/结果关联",
+      "各求解完成与收敛",
+      "网格检查",
+      "计算书输入审核"
+    ],
+    "audit_flow_behavior": "read-only diagnostic with all training_labels null",
+    "validate_design_behavior": "schema/basic_numeric_domain_only"
+  },
+  "unresolved_before_batch": [
+    "密封接触study及载荷/材料/预紧协议",
+    "工况集合与目标统计口径",
+    "45度试跑与正式Cv开度的区分",
+    "三组完整响应试跑"
+  ],
+  "geometry_verification": {
+    "scope": "local_baseline_14_single_variable_and_2_joint_cases",
+    "single_variable_suite_passed": 15,
+    "joint_cases_passed": 2,
+    "full_suite_report": "artifacts/full_geometry_v1_acceptance.json",
+    "joint_suite_report": "artifacts/joint_geometry_v1_acceptance.json",
+    "whole_optimization_domain_verified": false,
+    "simulation_labels_generated": false
+  }
+}

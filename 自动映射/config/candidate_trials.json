@@ -1,0 +1,3516 @@
+{
+  "status": "provisional_dimensions_not_design_mapping",
+  "training_ready": false,
+  "notes": [
+    "Dmax candidate is cone-construction circle, not yet physical maximum disc diameter",
+    "c reference plane is seal midplane; bm stack not validated",
+    "No solver or training labels in these experiments"
+  ],
+  "candidate_links": {
+    "c_mm": {
+      "base": 32.0,
+      "step": 0.32,
+      "links": {
+        "03阀体": [
+          "D2@草图3"
+        ],
+        "08大垫片": [
+          "D10@草图1"
+        ],
+        "09密封圈": [
+          "D3@草图1"
+        ],
+        "10压板": [
+          "D2@草图1"
+        ],
+        "11蝶板": [
+          "D2@草图1"
+        ]
+      }
+    },
+    "e_mm": {
+      "base": 3.7,
+      "step": 0.037,
+      "links": {
+        "03阀体": [
+          "D30@草图4",
+          "D4@草图6"
+        ],
+        "09密封圈": [
+          "D9@草图1"
+        ],
+        "11蝶板": [
+          "D1@草图1",
+          "D1@基准面2"
+        ]
+      }
+    },
+    "phi_deg": {
+      "base": 8.25,
+      "step": 0.1,
+      "links": {
+        "03阀体": [
+          "D3@草图5"
+        ],
+        "08大垫片": [
+          "D5@草图1"
+        ],
+        "09密封圈": [
+          "D5@草图1"
+        ],
+        "10压板": [
+          "D4@草图1"
+        ],
+        "11蝶板": [
+          "D2@草图3"
+        ]
+      }
+    },
+    "alpha_deg": {
+      "base": 35.5,
+      "step": 0.1,
+      "links": {
+        "03阀体": [
+          "D2@草图5"
+        ],
+        "08大垫片": [
+          "D7@草图1"
+        ],
+        "09密封圈": [
+          "D6@草图1"
+        ],
+        "10压板": [
+          "D7@草图1"
+        ],
+        "11蝶板": [
+          "D4@草图3"
+        ]
+      }
+    },
+    "Dmax_mm": {
+      "base": 194.37,
+      "step": 1.9437,
+      "links": {
+        "03阀体": [
+          "D5@草图5"
+        ],
+        "08大垫片": [
+          "D6@草图1"
+        ],
+        "09密封圈": [
+          "D7@草图1"
+        ],
+        "10压板": [
+          "D5@草图1"
+        ],
+        "11蝶板": [
+          "D3@草图3"
+        ]
+      }
+    },
+    "bm_mm": {
+      "base": 7.5,
+      "step": 0.075,
+      "links": {
+        "09密封圈": [
+          "D2@草图1"
+        ]
+      }
+    },
+    "ds_mm": {
+      "base": 45.0,
+      "step": 0.45,
+      "links": {
+        "03阀体": [
+          "D25@草图4"
+        ],
+        "04阀轴": [
+          "D4@草图1"
+        ],
+        "09密封圈": [
+          "D8@草图1"
+        ],
+        "11蝶板": [
+          "D2@草图2"
+        ]
+      }
+    }
+  },
+  "experiments": [
+    {
+      "id": "baseline",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\baseline",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "c_mm_minus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\c_mm_minus",
+      "candidate_input_values": {
+        "c_mm": 31.68,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03168
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03168
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03168
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03168
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03168
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "c_mm_plus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\c_mm_plus",
+      "candidate_input_values": {
+        "c_mm": 32.32,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03232
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03232
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03232
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03232
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.03232
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "e_mm_minus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\e_mm_minus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.6630000000000003,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0036630000000000005
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0036630000000000005
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0036630000000000005
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0036630000000000005
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0036630000000000005
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "e_mm_plus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\e_mm_plus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.737,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037370000000000003
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037370000000000003
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037370000000000003
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037370000000000003
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037370000000000003
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "phi_deg_minus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\phi_deg_minus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.15,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.14224433403753786
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.14224433403753786
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.14224433403753786
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.14224433403753786
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.14224433403753786
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "phi_deg_plus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\phi_deg_plus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.35,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1457349925415265
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1457349925415265
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1457349925415265
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1457349925415265
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1457349925415265
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "alpha_deg_minus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\alpha_deg_minus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.4,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3089232776029963
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.6178465552059926
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3089232776029963
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3089232776029963
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3089232776029963
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "alpha_deg_plus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\alpha_deg_plus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.6,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.31066860685499065
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.6213372137099813
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.31066860685499065
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.31066860685499065
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.31066860685499065
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "Dmax_mm_minus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\Dmax_mm_minus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 192.4263,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1924263
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1924263
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1924263
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1924263
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1924263
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "Dmax_mm_plus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\Dmax_mm_plus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 196.3137,
+        "bm_mm": 7.5,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1963137
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1963137
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1963137
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1963137
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.1963137
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "bm_mm_minus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\bm_mm_minus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.425,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.007425
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "bm_mm_plus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\bm_mm_plus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.575,
+        "ds_mm": 45.0
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.007575
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045
+        }
+      ]
+    },
+    {
+      "id": "ds_mm_minus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\ds_mm_minus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 44.55
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.04455
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.04455
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.04455
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.04455
+        }
+      ]
+    },
+    {
+      "id": "ds_mm_plus",
+      "folder": "C:\\Users\\Lenovo\\Desktop\\project with practical constraints\\流体仿真\\自动映射\\working\\candidate_trials\\v2\\ds_mm_plus",
+      "candidate_input_values": {
+        "c_mm": 32.0,
+        "e_mm": 3.7,
+        "phi_deg": 8.25,
+        "alpha_deg": 35.5,
+        "Dmax_mm": 194.37,
+        "bm_mm": 7.5,
+        "ds_mm": 45.45
+      },
+      "operations": [
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D10@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D3@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "c_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.032,
+          "value_SI": 0.032
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D30@草图4",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D4@草图6",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D9@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@草图1",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "e_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D1@基准面2",
+          "baseline_SI": 0.0037,
+          "value_SI": 0.0037
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D3@草图5",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "phi_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图3",
+          "baseline_SI": 0.1439896632895322,
+          "value_SI": 0.1439896632895322
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D2@草图5",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.619591884457987,
+          "value_SI": 0.619591884457987
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "alpha_deg",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D4@草图3",
+          "baseline_SI": 0.3097959422289935,
+          "value_SI": 0.3097959422289935
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D5@草图5",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+          "parameter": "D6@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D7@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+          "parameter": "D5@草图1",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "Dmax_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D3@草图3",
+          "baseline_SI": 0.19437000000000001,
+          "value_SI": 0.19437000000000001
+        },
+        {
+          "variable_candidate": "bm_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D2@草图1",
+          "baseline_SI": 0.0075,
+          "value_SI": 0.0075
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+          "parameter": "D25@草图4",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045450000000000004
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+          "parameter": "D4@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045450000000000004
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+          "parameter": "D8@草图1",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045450000000000004
+        },
+        {
+          "variable_candidate": "ds_mm",
+          "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+          "parameter": "D2@草图2",
+          "baseline_SI": 0.045,
+          "value_SI": 0.045450000000000004
+        }
+      ]
+    }
+  ]
+}

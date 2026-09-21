@@ -1,0 +1,39 @@
+{
+ "template_id": "sealed_flow_four_caps_v7_equations",
+ "created_local": "2026-09-18T13:00:00+08:00",
+ "source": "C:\\Users\\liujunxiang\\Desktop\\流体仿真2",
+ "derived_from": "cad_template_manifest_v6.json",
+ "change": "V6 plus seven global variables and 33 dimension equations in the six core parts (c, e, phi_arcsec, alpha_arcsec, s, bm, ds). Geometry verified identical to V6 (0 dimension differences above 1e-9) and the assembly rebuilds with 0 mate errors. Angles are arc-seconds because SolidWorks reads an angular value in an equation as arc-seconds in this document: 8.25 deg = 29700.",
+ "expected_assemblies": 1,
+ "expected_external_parts": 10,
+ "parameterized_parts": [
+  "8“D94R3Y-CL600C-03阀体.SLDPRT",
+  "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+  "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+  "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+  "8“D94R3Y-CL600C-10压板.SLDPRT",
+  "8“D94R3Y-CL600C-11蝶板.SLDPRT"
+ ],
+ "fixed_opening_deg": 45,
+ "fixed_endcap_parts": [
+  "封盖1.SLDPRT",
+  "封盖2.SLDPRT",
+  "封盖3.SLDPRT",
+  "封盖4.SLDPRT"
+ ],
+ "files": {
+  "8“D94R3Y-CL600C-00组装图.SLDASM": "c3b468b2045df4f2d14a2043c9a9e55a13f80cbe9530f6ea3e357a51142b657c",
+  "8“D94R3Y-CL600C-03阀体.SLDPRT": "c59c9506f59e8a168ca8ec3508e370d18bcbc05d1690bff9c3f87b85d4844143",
+  "8“D94R3Y-CL600C-04阀轴.SLDPRT": "f53ec3ef7e9ca0a6f402566fd76cae55950cffad8f4eaf36238003cf62c9474d",
+  "8“D94R3Y-CL600C-08大垫片.SLDPRT": "7609bcc51da456453e66c6ba623fa9dfa20582eb4337e5f792406e5b18ac03ec",
+  "8“D94R3Y-CL600C-09密封圈.SLDPRT": "1602b44c645b96b48c4cf4a7bed6b401b4d3473028b47a87b589d20588e6b1c9",
+  "8“D94R3Y-CL600C-10压板.SLDPRT": "73ac57b599196990c711205d58c03e680df022e9a00dab3ab03d28ddc6a9e1ef",
+  "8“D94R3Y-CL600C-11蝶板.SLDPRT": "c66723a9174bf8a31550ec9e33b29aa450d5a18ed7169a4f4c6f8a7810f025e8",
+  "封盖1.SLDPRT": "8eee059a4c6f79c881f1ca15d61f030ab4ce75e3baecf6fa28b761122024873c",
+  "封盖2.SLDPRT": "1df267b4564d90aa3da302cfbd0a4fcd8d6c3abe515a321be60a77395e045cb2",
+  "封盖3.SLDPRT": "c0821b7788f50ae8645700629669a7cd306e69b685f9f5428d8401374244f2bb",
+  "封盖4.SLDPRT": "6622778e543c9f879f05f98d2027eb4ec55b00f2486feac54d82a8527f6ae294"
+ },
+ "lock_policy": "锁定1/2/3/4 suppressed in the assembly as of 2026-09-18. Locks freeze a pair relative position but cannot stop the pair shapes changing when a driven dimension changes, which produced the measured overlaps; 锁定4 (disc<->shaft) additionally over-defined the assembly and blocked the shaft-to-bore concentric mate.",
+ "shaft_concentric_mate": "同心54 (11蝶板 <-> 04阀轴) added to the assembly as of 2026-09-19. Lock 4 must be suppressed first, otherwise AddMate5 returns swAddMateError_OverDefinedAssembly (5). With this mate present the shaft follows the disc bore, so changing e or c no longer leaves the two axes delta-e apart."
+}
