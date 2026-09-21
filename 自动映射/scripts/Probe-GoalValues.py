@@ -85,7 +85,7 @@ def main(argv=None) -> int:
             if goal is None:
                 break
             name = str(goal.GetGoalName())
-            if name not in fg.TRAINING_COLUMNS[7:14]:
+            if name not in fg.GOAL_COLUMNS:
                 continue
             entry: dict = {}
             try:

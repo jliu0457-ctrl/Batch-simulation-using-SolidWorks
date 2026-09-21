@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""把一个【几何已验收】的样本副本，一路跑到一行 15 列训练数据。
+"""把一个【几何已验收】的样本副本，一路跑到一行训练数据（契约见 flow_geometry.TRAINING_COLUMNS）。
 
     自动映射/working/seven_variable_trials/<run>/     ← 由 Run-OneDesign.exe 产出
         mapping_result.json (status=geometry_verified) + 装配体 + 6 个核心零件
                             ↓  Run-FlowSample.py
         S0 门禁 → S1 开装配体 → S2 CAD 重建 → S3 开口识别 → S4 Create Lids
         S5 封盖↔开口关联+命名 → S6 新建 Flow 工程 → S7 写 2BC+目标
-        S8 内部域门禁 → S9 网格+收敛 → S10 求解 → S11 读 FLD → S12 出 15 列
+        S8 内部域门禁 → S9 网格+收敛 → S10 求解 → S11 读 FLD → S12 出训练行
 
 用法::
 
@@ -278,10 +278,10 @@ def load_design(run: Path, mapping: dict, explicit: Path | None = None) -> dict:
         raise RuntimeError(
             "读不到七变量设计输入：请用 --design 指定（Run-OneDesign.exe 写的 e2e 报告里"
             "没有设计点，它的嵌套对象被序列化成了类型名）")
-    missing = [k for k in fg.TRAINING_COLUMNS[:7] if k not in design]
+    missing = [k for k in fg.DESIGN_COLUMNS if k not in design]
     if missing:
         raise RuntimeError(f"设计输入缺 {missing}")
-    return {k: float(design[k]) for k in fg.TRAINING_COLUMNS[:7]}
+    return {k: float(design[k]) for k in fg.DESIGN_COLUMNS}
 
 
 def assert_geometry_verified(mapping: dict, source: Path | None = None) -> None:
@@ -1028,7 +1028,7 @@ def read_goal_statistics(nca, project_dir: Path) -> tuple[dict[str, dict], dict]
         if goal is None:
             break
         name = str(goal.GetGoalName())
-        if name not in fg.TRAINING_COLUMNS[7:14]:
+        if name not in fg.GOAL_COLUMNS:
             continue
         entry: dict[str, Any] = {"value": float(goal.GetLastCalculatedValue())}
         try:
@@ -1087,7 +1087,7 @@ def read_goals_from_goals_dat(project_dir: Path) -> dict[str, dict]:
         return {}
     out: dict[str, dict] = {}
     for f in sorted(gd.glob("*.txt")):
-        if f.stem.startswith("Serv") or f.stem == "global_parameters" or f.stem not in fg.TRAINING_COLUMNS[7:14]:
+        if f.stem.startswith("Serv") or f.stem == "global_parameters" or f.stem not in fg.GOAL_COLUMNS:
             continue
         lines = [l for l in f.read_text(encoding="utf-8", errors="replace").splitlines() if l.strip()]
         if len(lines) < 2:
@@ -1198,7 +1198,9 @@ def _append_xlsx(path: Path, row: dict) -> dict:
         ws = wb.active
         header = [c.value for c in ws[1]]
         if header != list(fg.TRAINING_COLUMNS):
-            raise RuntimeError(f"{path} 的表头与 15 列契约不符，拒写")
+            raise RuntimeError(
+                f"{path} 的表头与 {len(fg.TRAINING_COLUMNS)} 列契约不符，拒写。"
+                "（契约刚加过列时最容易撞上这条 —— 老表要先补上新表头再跑）")
     else:
         path.parent.mkdir(parents=True, exist_ok=True)
         wb = Workbook()
@@ -1206,13 +1208,17 @@ def _append_xlsx(path: Path, row: dict) -> dict:
         ws.title = "训练数据"
         ws.append(list(fg.TRAINING_COLUMNS))
     try:
-        input_columns = tuple(fg.TRAINING_COLUMNS[:7])
+        input_columns = tuple(fg.DESIGN_COLUMNS)
+        #: ⚠️ 「是不是同一行」的判据必须**排除样本序号** —— 编号是元数据，不是内容。
+        #: 把它算进去的话，一条老行（编号为空）和一条新行（编号=7）即便七变量与
+        #: 目标值逐位相同，也会被判成「同输入不同目标」而拒写整批数据。
+        content_columns = tuple(fg.DESIGN_COLUMNS + fg.GOAL_COLUMNS + fg.LABEL_COLUMNS)
         all_columns = tuple(fg.TRAINING_COLUMNS)
         for values in ws.iter_rows(min_row=2, values_only=True):
             existing = dict(zip(all_columns, values))
             if not _rows_match(existing, row, input_columns):
                 continue
-            if _rows_match(existing, row, all_columns):
+            if _rows_match(existing, row, content_columns):
                 return {"appended": False, "deduplicated": True,
                         "note": "相同七变量与目标数据已存在，未重复追加"}
             raise RuntimeError(
@@ -1230,7 +1236,7 @@ def _append_xlsx(path: Path, row: dict) -> dict:
 # ================================================================= 主流程
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(description="单个样本：几何已验收 → 15 列训练行")
+    p = argparse.ArgumentParser(description="单个样本：几何已验收 → 训练行")
     p.add_argument("run_name")
     p.add_argument("--execute", action="store_true", help="真的执行（默认只预检）")
     p.add_argument("--resume", action="store_true")
@@ -1248,6 +1254,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--timeout-min", type=float, default=120.0)
     p.add_argument("--rho-kg-m3", type=float, default=998.2)
     p.add_argument("--dataset-xlsx", default=str(TRAINING_XLSX))
+    p.add_argument("--sample-id", default=None,
+                   help="样本编号（Variables/*.xlsx 的第一列）。批量跑时由 Run-Batch.py 传入；"
+                        "单样本跑不给，训练表该列留空")
     p.add_argument("--ray-overrides", default="", help='JSON：{"upper_body": 0.3}')
     return p
 
@@ -1260,7 +1269,8 @@ def main(argv=None) -> int:
     run = (RUNS_ROOT / args.run_name).resolve()
     report: dict[str, Any] = {"schema_version": 1, "run": str(run), "started_utc": now(),
                               "mode": "execute" if args.execute else "preflight",
-                              "config_name": args.config, "stages": {}}
+                              "config_name": args.config, "sample_id": args.sample_id,
+                              "stages": {}}
     out_path = run / ("flow_sample.json" if args.execute else "flow_sample_preflight.json")
     session = None
     try:
@@ -1566,7 +1576,7 @@ def main(argv=None) -> int:
             goal_meta["source"] = "api_trailing_window"
             goal_meta["degraded"] = "Goals.DAT 缺失 —— 平均值是自算的尾窗均值，与 GUI 不一致"
             goals = goal_values(goal_stats, value_mode)
-        criteria = fpj.verify_goal_criteria(project_dir, reference, list(fg.TRAINING_COLUMNS[7:14]))
+        criteria = fpj.verify_goal_criteria(project_dir, reference, list(fg.GOAL_COLUMNS))
         face_counts = fpj.solver_goal_face_counts(project_dir)
         human_counts = reference.get("human_solver_face_counts") or {}
         # 目标面数只当**旁证**：它是网格面数，受局部网格影响，不能当判据；
@@ -1618,8 +1628,9 @@ def main(argv=None) -> int:
                 + "; ".join(criteria["problems"]))
         _record(state, run, "results")
 
-        # ---- S12 15 列
-        row = fg.build_training_row(report["design"], goals, args.rho_kg_m3)
+        # ---- S12 训练行
+        row = fg.build_training_row(report["design"], goals, args.rho_kg_m3,
+                                    sample_id=args.sample_id)
         problems = fg.training_row_matches_contract(row)
         if problems:
             raise RuntimeError("训练行不满足契约：" + "; ".join(problems))

@@ -426,12 +426,37 @@ def check_ray_hits(
 
 # ---------------------------------------------------------------- 训练行
 
-TRAINING_COLUMNS = (
+#: 七个设计输入 —— 训练表的**前 7 列**，也是主表幂等去重的主键
+#: （依据 `数据生成/README.md`：「一个七变量设计点在训练主表中只能有一行」）。
+DESIGN_COLUMNS = (
     "c_mm", "e_mm", "phi_deg", "alpha_deg", "Dmax_mm", "bm_mm", "ds_mm",
+)
+
+#: 样本编号。**可选**：批量跑时由 `Variables/*.xlsx` 的第一列提供；
+#: 单样本跑不给它 —— 按契约「缺失的标签留空」，留 None，不得补零。
+ID_COLUMNS = ("样本序号",)
+
+#: 七个 CFD 目标。⚠️ 这些字符串**同时就是 Flow 里的目标名**，
+#: 改任何一个都会让 `read_goals_from_goals_dat` / `verify_goal_criteria` 静默失配。
+GOAL_COLUMNS = (
     "SG CV入口静压", "SG CV出口静压", "SG CV入口端面体积流量",
     "SG 蝶板法向压力", "SG 密比压 平均", "SG 密比压 最大", "SG 力矩Z",
-    "Cv",
 )
+
+#: 由三个 CV 目标**算出来的派生列**，两个都不得为空（缺一个整行就不成立）。
+#: `ΔP` = `SG CV入口静压 − SG CV出口静压`，是 Cv 公式的两个输入之一 ——
+#: 不记它就没法从表里反推 Cv 是怎么算出来的。
+LABEL_COLUMNS = ("ΔP", "Cv")
+
+#: 完整契约 = **1 编号 + 7 设计 + 7 目标 + 2 派生 = 17 列**。
+#: `样本序号` 放**第 1 列** —— 拿到表一眼就能对回来源表（`Variables/*.xlsx`）。
+#:
+#: ⚠️ **不要再用位置切片引用这张表。** 它以前是靠 `[:7]` / `[7:14]` / `[14]` 这种
+#: 下标工作的，2026-09-22 插入 `样本序号` 时，`TRAINING_COLUMNS[7:14]` **静默**变成了
+#: 「样本序号 + 前 6 个目标」—— 后果是 `SG 力矩Z` 被读取过滤器丢掉、写成 None，
+#: 而契约校验只保 `Cv`，于是一行缺力矩Z的数据照样被当合格行写进表。
+#: 引用一律用上面的具名分组（`DESIGN_COLUMNS` / `ID_COLUMNS` / `GOAL_COLUMNS` / …）。
+TRAINING_COLUMNS = ID_COLUMNS + DESIGN_COLUMNS + GOAL_COLUMNS + LABEL_COLUMNS
 
 CV_Q_FACTOR = 60.0 / 0.003785411784
 CV_DP_FACTOR = 6894.757293168
@@ -510,17 +535,25 @@ def build_training_row(
     design: Mapping[str, Any],
     goals: Mapping[str, float],
     rho_kg_m3: float,
+    sample_id: Any = None,
 ) -> dict:
-    """按 §2 契约构造 15 列训练行。
+    """按契约构造 16 列训练行。
 
     缺标签**留空(None)，不得补零**（response_contract.json: missing_label_policy）。
     但只要三个 CV 目标齐备，就一定要算出 Cv —— 缺任何一个就整行不成立。
+
+    `sample_id` 是**可选**的样本编号（`Variables/*.xlsx` 的第一列）：批量跑时由
+    `Run-Batch.py` 经 `--sample-id` 传进来；单样本跑不给它 → 该列留 None。
+    它是标识符不是数值，原样透传（Excel 里可能是整数，也可能是字符串）。
     """
     row: dict[str, Any] = {}
-    for var in TRAINING_COLUMNS[:7]:
+    for var in DESIGN_COLUMNS:
         if var not in design:
             raise ValueError(f"设计输入缺 {var}")
         row[var] = float(design[var])
+
+    for name in ID_COLUMNS:
+        row[name] = sample_id
 
     p_in = goals.get("SG CV入口静压")
     p_out = goals.get("SG CV出口静压")
@@ -532,9 +565,10 @@ def build_training_row(
     delta_p = float(p_in) - float(p_out)
     cv = cv_from_si(float(q), delta_p, rho_kg_m3)
 
-    for name in TRAINING_COLUMNS[7:-1]:
+    for name in GOAL_COLUMNS:
         value = goals.get(name)
         row[name] = None if value is None else float(value)
+    row["ΔP"] = delta_p
     row["Cv"] = cv
     return {col: row.get(col) for col in TRAINING_COLUMNS}
 
@@ -545,9 +579,13 @@ def training_row_matches_contract(row: Mapping[str, Any]) -> list[str]:
     if list(row.keys()) != list(TRAINING_COLUMNS):
         problems.append(f"列名或顺序不符：{list(row.keys())}")
     for name, value in row.items():
+        if name in ID_COLUMNS:
+            # 编号是**标识符不是数值**：允许留空（单样本跑就不给），
+            # 也允许非数字（别人给的 Excel 里可能是字符串编号）。
+            continue
         if value is None:
-            if name == "Cv":
-                problems.append("Cv 不得为空")
+            if name in LABEL_COLUMNS:
+                problems.append(f"{name} 不得为空（它由三个 CV 目标算出，空 = 整行不成立）")
             continue
         if not isinstance(value, (int, float)) or not math.isfinite(float(value)):
             problems.append(f"{name} 不是有限数：{value!r}")

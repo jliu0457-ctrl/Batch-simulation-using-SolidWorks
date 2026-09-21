@@ -264,6 +264,72 @@ def test_training_row_requires_cv_inputs():
             fg.build_training_row(HUMAN_DESIGN, bad, 998.2)
 
 
+# ------------------------------------------------ 契约分组：不许再用位置切片
+
+
+def test_training_columns_are_composed_from_named_groups():
+    """契约必须由具名分组拼出来 —— 位置切片正是 2026-09-22 那次静默错位的根因。
+
+    插入 `样本序号` 之后，`TRAINING_COLUMNS[7:14]` 会变成「样本序号 + 前 6 个目标」，
+    于是 `SG 力矩Z` 被读取过滤器丢掉、写成 None，而契约校验只保 `Cv` ——
+    一行缺力矩Z的数据照样算合格。所以断言必须钉在**分组**上，不是下标上。
+    """
+    assert fg.TRAINING_COLUMNS == (fg.ID_COLUMNS + fg.DESIGN_COLUMNS
+                                   + fg.GOAL_COLUMNS + fg.LABEL_COLUMNS)
+    assert len(fg.DESIGN_COLUMNS) == 7
+    assert len(fg.GOAL_COLUMNS) == 7, "目标名同时就是 Flow 目标名，少数一个会静默丢标签"
+    assert fg.ID_COLUMNS == ("样本序号",)
+    assert fg.LABEL_COLUMNS == ("ΔP", "Cv"), "两个派生列，ΔP 在前"
+    # 编号夹在设计输入与目标之间：这样「前 7 列 = 设计输入」（幂等主键）与「Cv 在末尾」都不变
+    # 编号在最前（拿到表就能对回来源表），Cv 在最后
+    assert fg.TRAINING_COLUMNS[0] == "样本序号"
+    assert fg.TRAINING_COLUMNS[-1] == "Cv"
+    # 但**没有任何地方能靠位置取到设计输入或目标** —— 一律具名
+    assert fg.TRAINING_COLUMNS[1:8] == fg.DESIGN_COLUMNS
+
+
+def test_every_goal_column_gets_its_value():
+    """七个目标必须**逐个**落到行里 —— 这是上面那条静默错位的直接回归守卫。"""
+    row = fg.build_training_row(HUMAN_DESIGN, HUMAN_GOALS, 998.2)
+    for name in fg.GOAL_COLUMNS:
+        assert row[name] == HUMAN_GOALS[name], f"{name} 没写进训练行"
+    assert row["SG 力矩Z"] == HUMAN_GOALS["SG 力矩Z"], "力矩Z 是最容易被过滤器丢掉的那个"
+
+
+def test_sample_id_is_optional_and_left_blank():
+    """单样本跑不给编号 → 留空。按契约「缺失的标签留空」，**不得补零**。"""
+    row = fg.build_training_row(HUMAN_DESIGN, HUMAN_GOALS, 998.2)
+    assert row["样本序号"] is None
+    assert fg.training_row_matches_contract(row) == [], "空编号必须仍然算合格行"
+
+
+def test_delta_p_is_the_pressure_difference():
+    """ΔP 必须记进表 —— Cv 是它和流量一起算出来的，不记它就反推不出 Cv 怎么来的。"""
+    row = fg.build_training_row(HUMAN_DESIGN, HUMAN_GOALS, 998.2)
+    expected = HUMAN_GOALS["SG CV入口静压"] - HUMAN_GOALS["SG CV出口静压"]
+    assert row["ΔP"] == pytest.approx(expected, rel=1e-12)
+    assert row["ΔP"] > 0, "入口静压高于出口，压差必须为正"
+    # 它和 Cv 是同一对输入算出来的：Cv 能复现
+    assert row["Cv"] == pytest.approx(
+        fg.cv_from_si(HUMAN_GOALS["SG CV入口端面体积流量"], row["ΔP"], 998.2), rel=1e-12)
+
+
+def test_contract_rejects_a_blank_delta_p():
+    """ΔP 和 Cv 一样是派生列 —— 空 = 整行不成立，和「缺标签留空」是两回事。"""
+    row = fg.build_training_row(HUMAN_DESIGN, HUMAN_GOALS, 998.2)
+    row["ΔP"] = None
+    problems = fg.training_row_matches_contract(row)
+    assert any("ΔP" in p for p in problems), problems
+
+
+def test_sample_id_is_carried_through_verbatim():
+    """编号是标识符不是数值：整数、字符串都原样透传，且都不该被判「不是有限数」。"""
+    for sid in (7, 3200, "S-07"):
+        row = fg.build_training_row(HUMAN_DESIGN, HUMAN_GOALS, 998.2, sample_id=sid)
+        assert row["样本序号"] == sid
+        assert fg.training_row_matches_contract(row) == [], f"{sid!r} 不该被判不合格"
+
+
 def test_cv_rejects_kg_per_m3_mistake():
     """ρ 必须以 kg/m³ 传入但公式内部除以 1000；把 kg/m³ 当相对密度会偏 ~31.6 倍。"""
     cv = fg.cv_from_si(0.10270053171754644, 103541.94744261276, 998.2)

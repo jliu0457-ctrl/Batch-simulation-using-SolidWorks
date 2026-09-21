@@ -336,7 +336,7 @@ def test_goals_dat_parser_handles_the_real_file():
     if not (HUMAN_DIR / "Goals.DAT").is_dir():
         pytest.skip("根目录没有 Goals.DAT")
     stats = R.read_goals_from_goals_dat(HUMAN_DIR)
-    assert set(stats) == set(fg.TRAINING_COLUMNS[7:14]), "7 个目标必须齐全"
+    assert set(stats) == set(fg.GOAL_COLUMNS), "7 个目标必须齐全"
     for name, e in stats.items():
         for key in ("value", "av_value", "window_min", "window_max", "delta", "criteria"):
             assert e[key] is not None, f"{name}.{key} 读不到"
@@ -458,7 +458,7 @@ def test_the_real_baseline_design_file_is_valid():
     """基准设计必须能直接喂进去 —— golden replay 靠它跟 1/1.info.json 逐值比对。"""
     baseline = MAPPING / "config" / "design_baseline_v6.json"
     design = json.loads(baseline.read_text(encoding="utf-8"))
-    assert list(design) == list(fg.TRAINING_COLUMNS[:7])
+    assert list(design) == list(fg.DESIGN_COLUMNS)
     assert design["c_mm"] == 32.0 and design["phi_deg"] == 8.25
     assert abs(design["Dmax_mm"] - 191.31786408589767) < 1e-9
 
@@ -697,10 +697,32 @@ def test_training_dataset_rejects_same_design_with_different_targets(tmp_path):
     path = tmp_path / "training.xlsx"
     R._append_xlsx(path, row)
     conflicting = dict(row)
-    conflicting[fg.TRAINING_COLUMNS[7]] += 1.0
+    conflicting[fg.GOAL_COLUMNS[0]] += 1.0    # 篡改第一个目标 —— 不是设计输入
 
     with pytest.raises(RuntimeError, match="相同七变量"):
         R._append_xlsx(path, conflicting)
+
+
+def test_training_dataset_ignores_the_sample_id_when_deduplicating(tmp_path):
+    """**样本序号是元数据，不参与「是不是同一行」的判定。**
+
+    回归：把编号算进整行比较的话，一条老行（编号为空）和一条新行（编号=7）
+    即便七变量与目标值逐位相同，也会被判成「同输入不同目标」而拒写 ——
+    表现是整批数据一行都进不去，而脚本每步都报成功。
+    """
+    design = {"c_mm": 32, "e_mm": 3.7, "phi_deg": 8.25, "alpha_deg": 35.5,
+              "Dmax_mm": 191.3, "bm_mm": 7.5, "ds_mm": 45}
+    goals = {"SG CV入口静压": 204866.94744261276, "SG CV出口静压": 101325.0,
+             "SG CV入口端面体积流量": 0.10270053171754644}
+    legacy = fg.build_training_row(design, goals, 998.2)          # 编号留空（老行）
+    batched = fg.build_training_row(design, goals, 998.2, sample_id=7)
+    path = tmp_path / "training.xlsx"
+
+    assert R._append_xlsx(path, legacy) == {"appended": True, "deduplicated": False}
+    result = R._append_xlsx(path, batched)
+
+    assert result["appended"] is False and result["deduplicated"] is True, \
+        "只剩编号不同 → 仍应判重复，不得报「同输入不同目标」"
 
 
 # ---------------------------------------------------------------- 模块卫生
