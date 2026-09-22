@@ -24,7 +24,7 @@
 
 只有两种情况会停，见 `should_stop_after_failure`：
 **探活发现 SolidWorks 没响应**（主判据），或**连续失败到了上限**
-（默认 8，`--max-consecutive-failures N` 可调，`0` = 不限）。
+（默认 10，`--max-consecutive-failures N` 可调，`0` = 不限）。
 停了就处理完再 `--execute` 续跑，已完成的样本会自动跳过。
 
 ⚠️ **判据是"报告"，不是退出码。** 2026-09-21 实测：SolidWorks 冷启动导致
@@ -77,9 +77,9 @@ RUN_SAMPLE = SCRIPTS / "Run-FlowSample.py"
 #:
 #: 这是**兜底**，不是主判据 —— 主判据是探活（见 `should_stop_after_failure`）。
 #: ⚠️ 别把它当"环境坏了"的判据：失败率只要不是零，它就迟早会误触发。
-#: 参考量级：失败率 82% 时 P(连续 8 次) ≈ 20%（平均每 ~11 个样本停一次）；
-#: 失败率 25% 时 P(连续 8 次) ≈ 0.0015%（几乎不触发）。
-DEFAULT_MAX_CONSECUTIVE_FAILURES = 8
+#: 参考量级：失败率 82% 时 P(连续 10 次) ≈ 14%（平均每 ~15 个样本停一次）；
+#: 失败率 25% 时 P(连续 10 次) ≈ 0.0001%（几乎不触发）。
+DEFAULT_MAX_CONSECUTIVE_FAILURES = 10
 
 #: 单步的外部超时（秒）。求解那一步由 `--timeout-min` 自己管，这里只兜底。
 TIMEOUT_ONE_DESIGN = 600
@@ -273,7 +273,7 @@ def should_stop_after_failure(consecutive: int, *, limit: int) -> tuple[bool, st
     探活能直接问出是哪一个，不用猜。次数上限则用来兜"原因各异但一直在倒"的情况。
 
     ⚠️ 别把次数上限当成"环境坏了"的判据 —— 失败率只要不是零它迟早误触发。
-    参考：失败率 82% 时 P(连续 8 次) ≈ 20%；失败率 25% 时 ≈ 0.0015%。
+    参考：失败率 82% 时 P(连续 10 次) ≈ 14%；失败率 25% 时 ≈ 0.0001%。
     """
     if limit > 0 and consecutive >= limit:
         return True, f"连续失败已达上限 {limit} 次"

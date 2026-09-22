@@ -177,8 +177,9 @@ def test_a_failed_sample_does_not_stop_the_batch(monkeypatch):
 def test_an_isolated_failure_never_stops_the_batch(monkeypatch):
     """偶尔挂一个、后面又成功 —— 中间的单个失败不该累积成"要停"。"""
     monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (True, "ok"))
-    for one_failure in (1, 2, 3):
-        assert B.should_stop_after_failure(one_failure, limit=8)[0] is False
+    limit = B.DEFAULT_MAX_CONSECUTIVE_FAILURES
+    for one_failure in (1, 2, limit - 1):
+        assert B.should_stop_after_failure(one_failure, limit=limit)[0] is False
 
 
 def test_a_dead_solidworks_stops_immediately_even_below_the_limit(monkeypatch):
@@ -188,7 +189,7 @@ def test_a_dead_solidworks_stops_immediately_even_below_the_limit(monkeypatch):
     探活能直接问出来。所以它优先于计数。
     """
     monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (False, "MK_E_UNAVAILABLE"))
-    stop, why = B.should_stop_after_failure(1, limit=8)
+    stop, why = B.should_stop_after_failure(1, limit=B.DEFAULT_MAX_CONSECUTIVE_FAILURES)
     assert stop is True, "才失败 1 次，但 SolidWorks 都没了 —— 该停"
     assert "MK_E_UNAVAILABLE" in why, "停下时要带上原因"
 
@@ -196,8 +197,9 @@ def test_a_dead_solidworks_stops_immediately_even_below_the_limit(monkeypatch):
 def test_the_counter_stops_at_the_limit(monkeypatch):
     """连续失败到上限就停 —— 兜底，防"原因各异但一直在倒"。"""
     monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (True, "ok"))
-    assert B.should_stop_after_failure(7, limit=8)[0] is False, "差一次不该停"
-    stop, why = B.should_stop_after_failure(8, limit=8)
+    limit = B.DEFAULT_MAX_CONSECUTIVE_FAILURES
+    assert B.should_stop_after_failure(limit - 1, limit=limit)[0] is False, "差一次不该停"
+    stop, why = B.should_stop_after_failure(limit, limit=limit)
     assert stop is True and "上限" in why
 
 
