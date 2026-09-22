@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "purpose": "Validate the user-proposed seven-variable CAD domain against the V6 parameterization adapter. Values are tested in isolated copies only; no Flow project or solver is run.",
+  "baseline": {
+    "c_mm": 32.0,
+    "e_mm": 3.7,
+    "phi_deg": 8.25,
+    "alpha_deg": 35.5,
+    "Dmax_mm": 191.31786408589767,
+    "bm_mm": 7.5,
+    "ds_mm": 45.0
+  },
+  "ranges": {
+    "c_mm": {"lower": 30.4, "upper": 33.6, "unit": "mm", "meaning": "轴向偏心距"},
+    "e_mm": {"lower": 3.515, "upper": 3.885, "unit": "mm", "meaning": "径向偏心距"},
+    "phi_deg": {"lower": 5.0, "upper": 11.0, "unit": "deg", "meaning": "偏心角"},
+    "alpha_deg": {"lower": 20.0, "upper": 40.0, "unit": "deg", "meaning": "全锥角；对应物理半锥角 10°～20°"},
+    "Dmax_mm": {"lower": 179.9, "upper": 193.9, "unit": "mm", "meaning": "密封锥底圆 Dmax"},
+    "bm_mm": {"lower": 7.0, "upper": 8.0, "unit": "mm", "meaning": "密封片厚度"},
+    "ds_mm": {"lower": 37.152, "upper": 49.0, "unit": "mm", "meaning": "阀杆工作段直径"}
+  },
+  "paired_corner_tests": [
+    ["phi_deg", "alpha_deg"],
+    ["Dmax_mm", "alpha_deg"]
+  ],
+  "global_corner_tests": true,
+  "notes": [
+    "alpha_deg is the full cone angle in the external design JSON. The CAD adapter writes alpha_deg/2 into the four half-angle sketches.",
+    "A CAD pass means the isolated V6 copy reports completed=true and physical_mapping_verified=true after rebuild, save, reopen, geometric readback, and assembly feature checks.",
+    "Flow lids, Flow project creation, meshing, and solver execution are intentionally excluded from this range-validation pass."
+  ]
+}

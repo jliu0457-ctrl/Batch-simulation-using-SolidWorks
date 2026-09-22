@@ -448,7 +448,7 @@ class SwSession:
 
 # ---------------------------------------------------------------- 廉价探活
 
-def probe_alive(session: SwSession, *, timeout_s: float = 8.0) -> tuple[bool, str]:
+def probe_alive(session: SwSession | None = None, *, timeout_s: float = 8.0) -> tuple[bool, str]:
     """模态对话框会堵住 COM 调用。调用前后各探一次，卡住就能及早发现。
 
     ⚠️ **必须在子线程里自己 `CoInitialize` 并重新 `GetActiveObject`。**
@@ -457,6 +457,10 @@ def probe_alive(session: SwSession, *, timeout_s: float = 8.0) -> tuple[bool, st
     于是**每一次都误判成模态框挡住**，比不检查还糟。
 
     返回 `(是否活着, 说明)`。超时、异常、非 34.x 都算不活。
+
+    `session` 参数**不参与实现**（函数自己在子线程里重新 `GetActiveObject`），
+    保留只是为了 `guarded()` 的调用签名稳定；批处理这类没有现成 session 的调用方
+    可以直接 `probe_alive()`。
     """
     import threading
     result: dict[str, Any] = {"ok": False, "why": "未知"}

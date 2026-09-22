@@ -19,6 +19,11 @@
 跑之前必须**手工启动 SolidWorks 并停在空白主界面**（铁律：绝不冷启动）。
 每个样本约 3.5 分钟；3200 个约 7.5 天。
 
+**失败不中断**：某个样本失败就记下原因、留一份诊断报告、删掉它的 run 目录，
+**继续跑下一个**（失败只写报告、不追加数据行）。
+唯一会停的情况是**探活发现 SolidWorks 没响应了** —— 那之后每个样本都只会是
+同一种失败；重启后 `--execute` 续跑，已完成的会自动跳过。
+
 ⚠️ **判据是"报告"，不是退出码。** 2026-09-21 实测：SolidWorks 冷启动导致
 `Run-OneDesign.exe` 连不上 Flow API 时，**退出码仍然是 0**，而报告里是
 `completed=false`。所以每一步都读报告字段，绝不看 returncode。
@@ -65,8 +70,12 @@ ID_COLUMN = fg.ID_COLUMNS[0]            # "样本序号"
 ONE_DESIGN_EXE = SCRIPTS / "Run-OneDesign.exe"
 RUN_SAMPLE = SCRIPTS / "Run-FlowSample.py"
 
-#: 连续失败这么多次就停 —— 多半是 SolidWorks 挂了，否则会连刷几十条同样的失败。
-CONSECUTIVE_FAILURE_STOP = 3
+# ⚠️ 这里**故意没有「连续失败 N 次就停」的熔断**。
+# 失败就该记下来、继续跑下一个（这是定好的口径）。数失败次数会把
+# 「这个设计点造不出来」误判成「环境坏了」—— 实测失败率 82% 时，
+# P(连续 3 次失败) ≈ 0.55，平均每 4~5 个样本就误停一次，等于没法无人值守。
+# 真正要防的「SolidWorks 挂了」改成**探活**来判：只在失败之后探一次，
+# 探到没响应才停（那时候之后再跑每个样本都只会是同一种失败）。
 
 #: 单步的外部超时（秒）。求解那一步由 `--timeout-min` 自己管，这里只兜底。
 TIMEOUT_ONE_DESIGN = 600
@@ -248,6 +257,22 @@ def run_one(sample_id, design: dict, args) -> dict:
             "deduplicated": bool(deduped)}
 
 
+def should_stop_after_failure() -> tuple[bool, str]:
+    """样本失败之后要不要停 —— **只看环境，不看失败次数**。
+
+    探活正常 → 这次失败是这个设计点自己的问题（CAD 造不出来、面绑不上…），
+    **记下来、继续跑下一个**。
+    探活不活 → SolidWorks 没了，那之后再跑每个样本都只会是同一种失败，停下让人重启。
+
+    ⚠️ **不要改成「连续失败 N 次就停」。** 在真实失败率下那会不停误触发 ——
+    实测 82% 失败时 P(连续 3 次失败) ≈ 0.55，平均每 4~5 个样本就误停一次，
+    把「设计点造不出来」当成「环境坏了」。这条有测试钉着
+    （`test_a_failed_sample_does_not_stop_the_batch`）。
+    """
+    alive, why = fses.probe_alive()
+    return (not alive), why
+
+
 def keep_failure_evidence(run: str, sample_id) -> str | None:
     """删 run 目录之前，把两份诊断报告拷出来 —— 否则失败原因只剩一句摘要。"""
     FAILURES_DIR.mkdir(parents=True, exist_ok=True)
@@ -310,7 +335,6 @@ def main(argv=None) -> int:
 
     # 保留策略：新样本门禁全过后，才删上一个成功的 run 目录（顺序不能反）
     previous_ok: Path | None = None
-    consecutive_failures = 0
     failures: list[dict] = []
 
     for n, design in enumerate(pending, start=1):
@@ -328,7 +352,6 @@ def main(argv=None) -> int:
         took = time.time() - started
 
         if result["ok"]:
-            consecutive_failures = 0
             this_run = RUNS_ROOT / result["run"]
             record(state, sample_id, "done", run=result["run"], seconds=round(took, 1),
                    internal_s_mm=result.get("internal_s_mm"), cv=result.get("cv"),
@@ -340,16 +363,18 @@ def main(argv=None) -> int:
                 print(f"    （按「只留最新一个」删掉上一个 run：{previous_ok.name}）")
             previous_ok = this_run
         else:
-            consecutive_failures += 1
             evidence = keep_failure_evidence(result["run"], sample_id)
             shutil.rmtree(RUNS_ROOT / result["run"], ignore_errors=True)
             record(state, sample_id, "failed", stage=result["stage"],
                    why=result["why"], evidence=evidence, seconds=round(took, 1))
             failures.append({"id": sample_id, **result})
             print(f"    ❌ 失败于 {result['stage']}  {took:.0f}s\n       {result['why']}", flush=True)
-            if consecutive_failures >= CONSECUTIVE_FAILURE_STOP:
-                print(f"\n⚠️ 连续 {consecutive_failures} 个失败 —— 停下。"
-                      "多半是 SolidWorks 掉了：重启它、停在空白主界面，再 --execute 续跑。")
+            # **失败不中断**：记下来、继续跑下一个。判据是**探活**，不是失败次数。
+            stop, why = should_stop_after_failure()
+            if stop:
+                print(f"\n⚠️ SolidWorks 没响应了（{why}）—— 停下。"
+                      "重启它、停在空白主界面，再跑 --execute 续跑；已完成的样本会自动跳过。",
+                      flush=True)
                 break
 
     print(f"\n{'=' * 60}")

@@ -165,6 +165,33 @@ def test_empty_folder_is_an_error(tmp_path, monkeypatch):
         B.collect_designs(None)
 
 
+# ---------------------------------------------------------------- 失败不停
+
+def test_a_failed_sample_does_not_stop_the_batch(monkeypatch):
+    """**失败就应该继续跑下一个** —— 这是定好的口径，不是可选项。
+
+    回归：这里曾经写成「连续 3 次失败就停」。实测失败率 82% 时
+    P(连续 3 次失败) ≈ 0.55，平均每 4~5 个样本就误停一次 ——
+    等于把「这个设计点造不出来」当成了「环境坏了」，批量根本跑不完。
+    """
+    monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (True, "ok"))
+    stop, why = B.should_stop_after_failure()
+    assert stop is False, f"SolidWorks 还活着，就不该因为样本失败而停（{why}）"
+
+
+def test_only_a_dead_solidworks_stops_the_batch(monkeypatch):
+    monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (False, "MK_E_UNAVAILABLE"))
+    stop, why = B.should_stop_after_failure()
+    assert stop is True
+    assert "MK_E_UNAVAILABLE" in why, "停下时要带上原因，方便判断"
+
+
+def test_the_batch_has_no_consecutive_failure_breaker():
+    """源码级守卫：别再把这个熔断加回来。"""
+    source = (MAPPING / "scripts" / "Run-Batch.py").read_text(encoding="utf-8")
+    assert "CONSECUTIVE_FAILURE_STOP" not in source
+
+
 # ---------------------------------------------------------------- 真实数据（只验不变量）
 
 def test_the_real_variable_table_reads_cleanly():
