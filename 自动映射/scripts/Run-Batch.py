@@ -69,6 +69,19 @@ STATE_PATH = BATCH_DIR / "batch_state.json"
 DESIGNS_DIR = BATCH_DIR / "designs"
 FAILURES_DIR = BATCH_DIR / "failures"
 
+#: 成功样本跑完之后，只把报告搬到这里；CAD 副本和 Flow 结果当场删掉。
+#:
+#: 一个 run 目录 21 MB：CAD 2.8 MB、Flow 结果 18 MB，而报告只有 ~35 KB。
+#: 按老口径「只留最新一个」磁盘占用是常数级，但代价是**成功样本一个都回查不了**；
+#: 按新口径 3200 个样本的报告全留也就 ~110 MB，换来每个成功样本都能事后回查。
+#: 中间产物只在跑这个样本的当下有意义，报告不是。
+REPORTS_DIR = MAPPING_ROOT / "working" / "_sample_reports"
+
+#: run 目录里要留下的文件，其余一律删。刻意不含 `flow_sample_state.json`（10 KB）：
+#: 那是续跑用的状态，样本跑完之后就没用了，同样的阶段轨迹 `flow_sample.json`
+#: 的 `stages` 里已经记了一份。
+KEEP_IN_RUN_DIR = ("flow_sample.json", "training_sample.csv")
+
 ID_COLUMN = fg.ID_COLUMNS[0]            # "样本序号"
 ONE_DESIGN_EXE = SCRIPTS / "Run-OneDesign.exe"
 RUN_SAMPLE = SCRIPTS / "Run-FlowSample.py"
@@ -295,6 +308,34 @@ def keep_failure_evidence(run: str, sample_id) -> str | None:
     return ", ".join(kept) or None
 
 
+def keep_sample_report(run: str) -> str | None:
+    """成功样本落盘之后：把报告搬进 `_sample_reports/`，再把整个 run 目录删掉。
+
+    ⚠️ **只能在样本成功走完之后调。** `Run-FlowSample.py --resume` 靠比对盘上的几何哈希
+    判断能不能续跑（`resume_is_safe`），对没跑完的样本删目录等于把续跑这条路断掉。
+    成功样本没有这个问题：训练行已经进表、门禁全过，不再需要续跑。
+
+    返回留下的文件名，一个都没留则返回 None。
+    """
+    run_dir = RUNS_ROOT / run
+    if not run_dir.is_dir():
+        return None
+    if not (run_dir / KEEP_IN_RUN_DIR[0]).is_file():
+        # 主报告都不在，这个目录不是"跑成功的样子"。**宁可留着占 21 MB，也不要删完
+        # 什么都没剩下** —— 报告是事后唯一能回查的东西，目录可以再删，报告丢了就没了。
+        return None
+    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    kept = []
+    for name in KEEP_IN_RUN_DIR:
+        src = run_dir / name
+        if src.is_file():
+            dest = REPORTS_DIR / f"{run}.{name}"
+            shutil.copy2(src, dest)
+            kept.append(dest.name)
+    shutil.rmtree(run_dir, ignore_errors=True)
+    return ", ".join(kept) or None
+
+
 # ============================================================ 主流程
 
 def build_parser() -> argparse.ArgumentParser:
@@ -305,6 +346,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--only", default="", help="只跑这些编号，逗号分隔，如 3,7,12")
     p.add_argument("--solve-timeout-min", type=float, default=25.0)
     p.add_argument("--redo", action="store_true", help="已完成/已失败的也重跑")
+    p.add_argument("--keep-run-dirs", action="store_true",
+                   help="跑完不删 CAD 副本与 Flow 结果（默认删掉，只把报告搬进 "
+                        f"{REPORTS_DIR.name}/）。排查某个具体样本时才用")
     p.add_argument("--max-consecutive-failures", type=int,
                    default=DEFAULT_MAX_CONSECUTIVE_FAILURES,
                    help=f"连续失败多少次就先停下（默认 {DEFAULT_MAX_CONSECUTIVE_FAILURES}，0 = 不限）。"
@@ -345,8 +389,8 @@ def main(argv=None) -> int:
         print("\n没有要跑的样本。")
         return 0
 
-    # 保留策略：新样本门禁全过后，才删上一个成功的 run 目录（顺序不能反）
-    previous_ok: Path | None = None
+    # 保留策略：样本门禁全过、训练行进表之后，才动它的 run 目录（顺序不能反）。
+    # 默认删掉 21 MB 的 CAD 副本与 Flow 结果、把 35 KB 的报告搬去 `_sample_reports/`。
     failures: list[dict] = []
     consecutive_failures = 0
 
@@ -366,16 +410,21 @@ def main(argv=None) -> int:
 
         if result["ok"]:
             consecutive_failures = 0
-            this_run = RUNS_ROOT / result["run"]
             record(state, sample_id, "done", run=result["run"], seconds=round(took, 1),
                    internal_s_mm=result.get("internal_s_mm"), cv=result.get("cv"),
                    deduplicated=result.get("deduplicated"))
             print(f"    ✅ 完成  {took:.0f}s   Cv={result.get('cv')}", flush=True)
-            # 新样本已经过全部门禁并落盘训练行 → 现在才删上一个
-            if previous_ok is not None and previous_ok != this_run and previous_ok.exists():
-                shutil.rmtree(previous_ok)
-                print(f"    （按「只留最新一个」删掉上一个 run：{previous_ok.name}）")
-            previous_ok = this_run
+            # 训练行已经进表、门禁全过 —— 此刻才动 run 目录。删重文件、留报告。
+            if args.keep_run_dirs:
+                print(f"    （--keep-run-dirs：完整副本留在 {result['run']}）")
+            else:
+                kept = keep_sample_report(result["run"])
+                if kept:
+                    print(f"    （删掉 CAD 副本与 Flow 结果，报告存到 {REPORTS_DIR.name}/：{kept}）",
+                          flush=True)
+                else:
+                    print(f"    ⚠️ {result['run']} 里没有主报告，**没有删** —— 请人工看一眼",
+                          flush=True)
         else:
             consecutive_failures += 1
             evidence = keep_failure_evidence(result["run"], sample_id)
@@ -402,6 +451,8 @@ def main(argv=None) -> int:
             print(f"  样本 {f['id']:<6} {f['stage']:<12} {f['why'][:100]}")
     print(f"\n状态文件 : {STATE_PATH}")
     print(f"失败证据 : {FAILURES_DIR}")
+    if not args.keep_run_dirs:
+        print(f"样本报告 : {REPORTS_DIR}")
     print(f"训练表   : {MAPPING_ROOT / 'outputs' / 'training_dataset.xlsx'}")
     return 0 if not failures else 1
 

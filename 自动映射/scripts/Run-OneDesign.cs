@@ -14,6 +14,16 @@ public static class RunOneDesign
 {
     public static int Main(string[] argv)
     {
+        if (argv.Length == 3 && argv[0] == "--export-topology")
+        {
+            string probeRoot = Path.GetFullPath(argv[1]);
+            string probeFolder = Path.GetFullPath(argv[2]);
+            object topology = SevenVariableAdapter.ExportTopology(probeRoot, probeFolder);
+            string output = Path.Combine(probeFolder, "template_topology_csharp.json");
+            File.WriteAllText(output, Json.Write(topology), new UTF8Encoding(false));
+            Console.WriteLine("topology -> " + output);
+            return 0;
+        }
         if (argv.Length < 3)
         {
             Console.Error.WriteLine("usage: Run-OneDesign.exe <root> <runName> <designJsonFile>");

@@ -204,13 +204,31 @@ def face_local_records(component) -> list[dict]:
     for body in component_bodies(component):
         for face in as_list(safe_get(body, "GetFaces")):
             surface = safe_get(face, "GetSurface")
+            # ⚠️ 这两个在 pywin32 晚期绑定下是**属性，不是方法** —— 实测
+            # `face.GetEdges` 直接就是 tuple、`face.GetLoopCount` 直接就是 int；
+            # 加括号调用会抛 `TypeError: 'tuple' object is not callable`，
+            # 被 except 吞掉之后**静默记成 0**，签名退化成纯类型、看起来还挺正常。
+            # 所以走 `safe_get`（属性访问）才对 —— safe_get 只对真正的 Python
+            # 函数/方法发起调用，COM 属性原样返回。别改回加括号的形式。
+            edge_count = len(as_list(safe_get(face, "GetEdges")))
+            loop_count = int(safe_get(face, "GetLoopCount", default=0) or 0)
             rec: dict[str, Any] = {
                 "area_m2": abs(float(safe_get(face, "GetArea", default=0.0) or 0.0)),
                 "box_m": [float(v) for v in as_list(safe_get(face, "GetBox"))][:6],
+                "edge_count": edge_count,
+                "loop_count": loop_count,
                 "is_plane": bool(safe_get(surface, "IsPlane", default=False)),
                 "is_cone": bool(safe_get(surface, "IsCone", default=False)),
                 "is_cylinder": bool(safe_get(surface, "IsCylinder", default=False)),
             }
+            # 三个已知类型都不成立时，才去问其余曲面类型。这是 `?` 面的唯一线索：
+            # 圆角是 IsTorus、重建退化被替换出来的近似面是 IsBSurface —— 两者结论相反。
+            # 短路是为了不给每个面都加 7 次 COM 调用（整台装配体六七百个面）。
+            if not (rec["is_plane"] or rec["is_cone"] or rec["is_cylinder"]):
+                rec["other_surface"] = [name for name in (
+                    "IsSphere", "IsTorus", "IsBSurface", "IsSwept",
+                    "IsExtruded", "IsRevolution", "IsOffset",
+                ) if bool(safe_get(surface, name, default=False))]
             if rec["is_plane"]:
                 rec["plane_params"] = [float(v) for v in as_list(safe_get(surface, "PlaneParams"))][:6]
             if rec["is_cone"]:

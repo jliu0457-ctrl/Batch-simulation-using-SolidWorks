@@ -229,3 +229,80 @@ def test_the_real_variable_table_reads_cleanly():
         for name in fg.DESIGN_COLUMNS:
             assert isinstance(design[name], float), f"{name} 必须是 float"
     assert len(sources) == len(designs)
+
+
+# ---------------------------------------------------------------- 跑完之后的清理
+
+def _fake_run(tmp_path, run, *, with_report=True):
+    """造一个像样的 run 目录：CAD 副本 + Flow 结果 + 报告。"""
+    d = tmp_path / run
+    (d / "1").mkdir(parents=True)
+    (d / "8“D94R3Y-CL600C-11蝶板.SLDPRT").write_bytes(b"x" * 2048)
+    (d / "1" / "1.fbd").write_bytes(b"y" * 4096)
+    (d / "flow_sample_state.json").write_text("{}", encoding="utf-8")
+    if with_report:
+        (d / "flow_sample.json").write_text('{"status":"completed"}', encoding="utf-8")
+        (d / "training_sample.csv").write_text("a,b\n", encoding="utf-8")
+    return d
+
+
+def test_success_deletes_the_copy_but_keeps_the_report(tmp_path, monkeypatch):
+    monkeypatch.setattr(B, "RUNS_ROOT", tmp_path)
+    reports = tmp_path / "_sample_reports"
+    monkeypatch.setattr(B, "REPORTS_DIR", reports)
+    _fake_run(tmp_path, "sample_7")
+
+    kept = B.keep_sample_report("sample_7")
+
+    assert not (tmp_path / "sample_7").exists(), "整个副本目录应当没了"
+    assert (reports / "sample_7.flow_sample.json").is_file()
+    assert (reports / "sample_7.training_sample.csv").is_file()
+    assert kept and "flow_sample" in kept
+
+
+def test_report_dir_holds_nothing_heavy(tmp_path, monkeypatch):
+    """只搬报告不删重文件，等于这件事没做。"""
+    monkeypatch.setattr(B, "RUNS_ROOT", tmp_path)
+    reports = tmp_path / "_sample_reports"
+    monkeypatch.setattr(B, "REPORTS_DIR", reports)
+    _fake_run(tmp_path, "sample_8")
+
+    B.keep_sample_report("sample_8")
+
+    names = [p.name for p in reports.iterdir()]
+    assert not any(n.endswith((".SLDPRT", ".SLDASM", ".fbd", ".fld", ".cpt")) for n in names)
+    assert not any("state" in n for n in names), "续跑状态是死重量，阶段轨迹报告里已有"
+
+
+def test_a_run_without_the_main_report_is_not_deleted(tmp_path, monkeypatch):
+    """主报告不在 = 这个目录不是"跑成功的样子"。宁可留着占地方，也不要删完什么都不剩。"""
+    monkeypatch.setattr(B, "RUNS_ROOT", tmp_path)
+    monkeypatch.setattr(B, "REPORTS_DIR", tmp_path / "_sample_reports")
+    _fake_run(tmp_path, "sample_9", with_report=False)
+
+    assert B.keep_sample_report("sample_9") is None
+    assert (tmp_path / "sample_9").is_dir(), "不该删"
+
+
+def test_missing_run_dir_is_not_an_error(tmp_path, monkeypatch):
+    monkeypatch.setattr(B, "RUNS_ROOT", tmp_path)
+    monkeypatch.setattr(B, "REPORTS_DIR", tmp_path / "_sample_reports")
+    assert B.keep_sample_report("根本没有这个 run") is None
+
+
+def test_cleanup_is_only_wired_into_the_success_branch():
+    """清理只能挂在成功分支上。
+
+    挂到失败分支就出事了：`Run-FlowSample.py --resume` 靠比对盘上的几何哈希判断能不能续跑
+    （`resume_is_safe`），而失败样本恰恰是最需要续跑的那种。删了目录，续跑这条路就断了。
+    """
+    source = (MAPPING / "scripts" / "Run-Batch.py").read_text(encoding="utf-8")
+    assert source.count("keep_sample_report(") == 2, "一处定义 + 一处调用，多出来的调用要交代清楚"
+    # 只看主循环：按 `else:` 把成功分支和失败分支切开
+    loop = source.split("for n, design in enumerate(pending", 1)[1]
+    loop = loop.split("print(f\"\\n{'=' * 60}\")", 1)[0]
+    ok_branch, marker, fail_branch = loop.partition("\n        else:\n")
+    assert marker, "没能切开成功/失败分支 —— 主循环的结构变了，这条断言要跟着改"
+    assert "keep_sample_report(" in ok_branch
+    assert "keep_sample_report(" not in fail_branch, \
+        "失败分支不能调清理 —— 样本还没跑完，删掉 run 目录会断掉 --resume"

@@ -215,10 +215,11 @@ public static class SevenVariableAdapter
         catch (COMException)
         {
             try { com = Marshal.GetActiveObject("SldWorks.Application"); }
-            catch (COMException)
+            catch (COMException ex)
             {
-                try { com = Activator.CreateInstance(Type.GetTypeFromProgID("SldWorks.Application.34", true)); }
-                catch (COMException) { com = Activator.CreateInstance(Type.GetTypeFromProgID("SldWorks.Application", true)); }
+                throw new InvalidOperationException(
+                    "No running SolidWorks instance is visible through ROT. Refusing to cold-start a second instance; "
+                    + "start SolidWorks manually on a blank window and use the safe bootstrap path.", ex);
             }
         }
         var app = (SW.ISldWorks)com;
@@ -948,6 +949,181 @@ public static class SevenVariableAdapter
     {
         return A(((SW.IAssemblyDoc)assembly).GetComponents(false)).Cast<SW.IComponent2>().ToArray();
     }
+    /// <summary>面的类型字母。`O` 只留给认不出来的曲面。
+    ///
+    /// 单独分出 `S`（球面）和 `T`（环面）是有用的：**圆角就是环面**。
+    /// 圆角被吸收掉、或者被重建退化出来的近似面顶替，都会在类型串上现形。
+    ///
+    /// ⚠️ 只有 `IsSphere`/`IsTorus` 这两个额外谓词能用 —— 这版 Interop 的 `ISurface`
+    /// **没有** B 样条/扫掠类的谓词（实测过）。所以样条面仍然落在 `O` 里。
+    /// 这不是问题：退化出来的样条面顶掉原来的平面时，类型会从 `P` 变成 `O`，
+    /// 一样会被拦下。
+    ///
+    /// 也刻意不用「怎么造出来的」那组谓词（扫掠/拉伸/旋转/偏移）—— 它们说的是构造方式，
+    /// 可以和平面/锥面的判定同时为真，混进来只会让类型来回翻。</summary>
+    static string SurfaceKind(SW.ISurface surface)
+    {
+        if (surface == null) return "O";
+        if (surface.IsPlane()) return "P";
+        if (surface.IsCylinder()) return "Y";
+        if (surface.IsCone()) return "C";
+        if (surface.IsSphere()) return "S";
+        if (surface.IsTorus()) return "T";
+        return "O";
+    }
+    /// <summary>按 **SolidWorks 返回的序号顺序**取一个组件的逐面类型串。
+    ///
+    /// 取面走 `IComponent2.GetBodies3`，和 Flow 那边同一条路（`Run-FlowSample.py` 的
+    /// `make_face_index_selector` 也走这条）。2026-09-22 实测：零件文档路径
+    /// （`IPartDoc.GetBodies2`）给出的顺序和它逐位一致，但这里不换 —— 免得两条路哪天分叉。
+    ///
+    /// ⚠️ **这一串的顺序只在"同一份几何"内部稳定，跨设计点会变。** 实测：
+    ///   * 同一份几何：会话内连取两遍 / 关掉装配体重开 / 跨 SolidWorks 重启 —— 全部逐位一致
+    ///   * 换设计数值：蝶板在 α=20/25/30 的顺序全都和基准 α=35.5 不同（类型计数完全一致）；
+    ///     515 面的 03阀体在 α=20/25 也不同
+    ///
+    /// **所以调用方不能按序号逐位比**，判据要用类型计数（见 `ValidateTopology`）。
+    /// 顺序本身仍然有用：它决定把这张面排在第几位，也就决定了 Flow 按序号绑面时
+    /// 会绑到谁 —— 那是另一个问题，见 `ValidateTopology` 里对 `first_index_divergence` 的说明。
+    /// </summary>
+    static string ComponentFaceKinds(SW.IComponent2 component)
+    {
+        object bodyInfo;
+        var bodiesObject = component.GetBodies3(0, out bodyInfo);
+        var kinds = new List<char>();
+        foreach (var body in A(bodiesObject).Cast<SW.IBody2>())
+            foreach (var face in A(body.GetFaces()).Cast<SW.IFace2>())
+                kinds.Add(SurfaceKind((SW.ISurface)face.GetSurface())[0]);
+        if (kinds.Count == 0)
+            throw new InvalidOperationException("Topology gate found no faces for component " + component.Name2);
+        return new string(kinds.ToArray());
+    }
+    static string[] KindCounts(string kinds)
+    {
+        return kinds.GroupBy(ch => ch).OrderBy(g => g.Key)
+            .Select(g => g.Key + "=" + g.Count().ToString(CultureInfo.InvariantCulture)).ToArray();
+    }
+    static object ValidateTopology(Context c)
+    {
+        string manifestPath = Path.Combine(c.Root, "config", "cad_template_manifest_v6.json");
+        var manifest = Serializer().DeserializeObject(File.ReadAllText(manifestPath)) as Dictionary<string, object>;
+        if (manifest == null || !manifest.ContainsKey("topology"))
+            throw new InvalidOperationException("TOPOLOGY_REFERENCE_MISSING: no topology block in " + manifestPath);
+        var topology = manifest["topology"] as Dictionary<string, object>;
+        var parts = topology == null || !topology.ContainsKey("parts") ? null : A(topology["parts"]);
+        if (parts == null || parts.Length != 6)
+            throw new InvalidOperationException(
+                "TOPOLOGY_REFERENCE_MISSING: reference must contain exactly six parameterized parts.");
+
+        // ⚠️ 「参考没准备好」和「这个设计点坏了」必须能分开。
+        // 前者是**环境问题**（该停下来去冻结参考），后者是**这个样本的问题**（跳过继续跑）。
+        // 两者都走 completed=false，所以参考侧的失败一律带 `TOPOLOGY_REFERENCE_MISSING:`
+        // 前缀 —— 否则批量会把 3200 个样本全记成"几何坏了"，而真正该做的是去补参考。
+        var checks = new List<object>();
+        foreach (var element in parts)
+        {
+            var reference = element as Dictionary<string, object>;
+            if (reference == null || !reference.ContainsKey("token")
+                || !reference.ContainsKey("face_count") || !reference.ContainsKey("kinds"))
+                throw new InvalidOperationException(
+                    "TOPOLOGY_REFERENCE_MISSING: every part entry needs token + face_count + kinds.");
+            string token = Convert.ToString(reference["token"], CultureInfo.InvariantCulture);
+            if (!CorePartTokens.Contains(token))
+                throw new InvalidOperationException("TOPOLOGY_REFERENCE_MISSING: unknown part token " + token);
+            string expectedKinds = Convert.ToString(reference["kinds"], CultureInfo.InvariantCulture) ?? "";
+            int expectedCount = Convert.ToInt32(reference["face_count"], CultureInfo.InvariantCulture);
+            if (expectedCount != expectedKinds.Length)
+                throw new InvalidOperationException(
+                    "TOPOLOGY_REFERENCE_MISSING: face_count disagrees with kinds for " + token);
+
+            var matches = Components(c.Assembly).Where(x => x.Name2.Contains(token)).ToArray();
+            if (matches.Length != 1)
+                throw new InvalidOperationException("Topology gate expected one resolved component for " + token
+                    + "; actual=" + matches.Length.ToString(CultureInfo.InvariantCulture));
+            string actualKinds = ComponentFaceKinds(matches[0]);
+            // 判据是 **面数 + 逐类型计数**，不是逐位序列。
+            //
+            // 2026-09-22 实测：面顺序会随**设计数值**变 —— 蝶板在 α=20/25/30 的顺序
+            // 都和 α=35.5 基准不同，而它们的类型计数与基准**完全一致**，几何是好的；
+            // 真正坏掉的 failpt 则是面数 55→59、类型计数多出 P×1 + C×3。
+            // 所以逐位比会把"合法的重排"全判成失败（参考导出和检查流程不同、
+            // 或只是设计点不同，都会触发），而类型计数正好把这两种情况分开。
+            //
+            // ⚠️ 序号级的差异**只记不判**（first_index_divergence）。它有用 ——
+            // Flow 是按序号绑面的，顺序变了意味着绑定的语义需要另外把关 ——
+            // 但那是另一个问题，不能拿它当"几何坏了"的证据。
+            string[] expectedCounts = KindCounts(expectedKinds);
+            string[] actualCounts = KindCounts(actualKinds);
+            int divergence = -1, shared = Math.Min(expectedKinds.Length, actualKinds.Length);
+            for (int i = 0; i < shared; i++)
+                if (expectedKinds[i] != actualKinds[i]) { divergence = i; break; }
+            if (divergence < 0 && expectedKinds.Length != actualKinds.Length) divergence = shared;
+
+            if (expectedKinds.Length != actualKinds.Length
+                || !expectedCounts.SequenceEqual(actualCounts))
+            {
+                var diff = new {
+                    component = token,
+                    expected_faces = expectedKinds.Length,
+                    actual_faces = actualKinds.Length,
+                    expected_kind_counts = expectedCounts,
+                    actual_kind_counts = actualCounts,
+                    first_index_divergence = divergence,
+                    extraction_path = "IComponent2.GetBodies3 -> IBody2.GetFaces"
+                };
+                throw new InvalidOperationException("Topology gate failed: " + Serializer().Serialize(diff));
+            }
+            checks.Add(new { component = token, face_count = actualKinds.Length,
+                kind_counts = actualCounts,
+                first_index_divergence = divergence, matched = true });
+        }
+        return new { passed = true, checked_parts = checks.ToArray(),
+            extraction_path = "IComponent2.GetBodies3 -> IBody2.GetFaces",
+            reference_source = Convert.ToString(topology["source"], CultureInfo.InvariantCulture) };
+    }
+    /// <summary>Read the rebuilt topology from a hash-verified V6 probe copy.
+    /// Kept next to ValidateTopology so reference creation and enforcement use identical COM calls.</summary>
+    public static object ExportTopology(string root, string isolatedFolder)
+    {
+        root = RootPath(root);
+        isolatedFolder = Under(isolatedFolder, Path.Combine(root, "working", "seven_variable_trials"), true);
+        var app = Connect();
+        try
+        {
+            string assemblyPath = Directory.GetFiles(isolatedFolder, "*.SLDASM").Single();
+            var assembly = Open(app, assemblyPath, 2, false, AssemblyConfiguration);
+            assembly.ShowConfiguration2(AssemblyConfiguration);
+            // ⚠️ 导出必须复现检查侧**全部**准备动作。检查在 `ValidateTopology` 调用点之前
+            // 会先 ReleaseOverConstrainingLocks + 强制重建；导出少做一步，就可能导出一个
+            // "母版自己都过不了"的参考 —— 这个坑这次已经踩过一次（codex 的 4 号观察）。
+            ReleaseOverConstrainingLocks(assembly);
+            Rebuild(assembly);
+            var rows = new List<object>();
+            foreach (var token in CorePartTokens)
+            {
+                var matches = Components(assembly).Where(x => x.Name2.Contains(token)).ToArray();
+                if (matches.Length != 1)
+                    throw new InvalidOperationException("Topology export expected one resolved component for " + token);
+                string kinds = ComponentFaceKinds(matches[0]);
+                rows.Add(new {
+                    token = token,
+                    file = Path.GetFileName(matches[0].GetPathName()),
+                    face_count = kinds.Length,
+                    kinds = kinds,
+                    kind_counts = KindCounts(kinds)
+                });
+            }
+            return new {
+                source = isolatedFolder,
+                precondition = "lock mates released, opened in 开度45°, ForceRebuild3(False) completed",
+                extraction_path = "IComponent2.GetBodies3 -> IBody2.GetFaces",
+                face_order = "SolidWorks returned index order; this is significant, do not sort",
+                kind_legend = "P=plane Y=cylinder C=cone S=sphere T=torus B=bspline O=unclassified",
+                parts = rows.ToArray()
+            };
+        }
+        finally { CloseFolder(app, isolatedFolder); }
+    }
     static object References(SW.IModelDoc2 assembly, string folder)
     {
         var refs = new List<object>();
@@ -1263,6 +1439,8 @@ public static class SevenVariableAdapter
             report["reopened_fixed_endcaps_verified"] = true;
             if (FeatureErrors(c.Assembly).Count != 0)
                 throw new InvalidOperationException("Assembly feature errors remain after reopen.");
+            report["topology_gate"] = ValidateTopology(c);
+            Stage(c, "topology_gate_complete", report["topology_gate"]);
             Near("reopened opening angle", Degrees(Dimension(c.Assembly, "D1@角度2").SystemValue), 45, AngleToleranceDeg);
             report["reopened_axis"] = AssemblyGeometry(c, design, false);
             Stage(c, "create_capless_output_start", null);

@@ -32,5 +32,84 @@
  "shaft_concentric_mate": "同心54 (11蝶板 <-> 04阀轴) added 2026-09-19. Lock 4 must be suppressed first or AddMate5 returns swAddMateError_OverDefinedAssembly (5). With it the shaft follows the disc bore, so changing e or c no longer leaves the two axes delta-e apart (measured interference 1643.14 mm3 -> 0).",
  "flow_project_policy": "No Flow project is stored in this template as of 2026-09-19. The adapter discards any inherited project on every run anyway; keeping one only meant a RemoveProject call that intermittently dies with RPC_E_DISCONNECTED and fails the whole run. Projects are rebuilt from the Flow installation template internal_water.fwp plus the boundary conditions and goals defined in code.",
  "ring_seat_fix_20260920": "09密封圈.SLDPRT re-hashed: its 草图1 bushing is now split at the 194.37 construction-line end and welded to it (matches 03阀体/11蝶板/08大垫片/10压板, which were always drawn that way). Without it the seal cone did not follow s and 03阀体+09密封圈 interfered by 250.74 mm3; after it, 0. Also D10@草图1 = (s/2+12)-70, the stock rectangle radial span - its outer edge lies inside the revolved cut so growing it is free. Geometry unchanged: vol 89696.263, box and cone face bit-identical. | 2026-09-20 later: 10压板.SLDPRT re-hashed twice - (a) its bushing anchor point was re-pointed from a fixed point to the 194.37 construction-line end (D8=1.575 now drives, D12=95.61 driven), so the plate cone follows s (measured -1.339 normal, matching 09密封圈 -1.337); (b) D13@草图1 added and set to (s/2+13)-47.5, the stock rectangle radial span - outer edge lies inside the revolved cut (verified: +10mm leaves volume/box/cones bit-identical). Adapter no longer writes 10压板 D8 (it is now the constant 1.575) and writes D13 instead.",
- "cap_policy": "The template carries NO endcaps as of 2026-09-19. The four caps used to exist only to be deleted on every run; with them came the failure mode where an inherited Flow project referencing the deleted caps raised a modal dialog. Six core parts plus the assembly is now the whole template, and Flow Create Lids builds the four lids on the capless output."
+ "cap_policy": "The template carries NO endcaps as of 2026-09-19. The four caps used to exist only to be deleted on every run; with them came the failure mode where an inherited Flow project referencing the deleted caps raised a modal dialog. Six core parts plus the assembly is now the whole template, and Flow Create Lids builds the four lids on the capless output.",
+ "topology": {
+  "source": "C:\\Users\\liujunxiang\\Desktop\\流体仿真2\\自动映射\\working\\seven_variable_trials\\topogate_ref",
+  "precondition": "lock mates released, opened in 开度45°, ForceRebuild3(False) completed",
+  "extraction_path": "IComponent2.GetBodies3 -> IBody2.GetFaces",
+  "face_order": "SolidWorks returned index order; this is significant, do not sort",
+  "kind_legend": "P=plane Y=cylinder C=cone S=sphere T=torus B=bspline O=unclassified",
+  "parts": [
+   {
+    "token": "03阀体",
+    "file": "8“D94R3Y-CL600C-03阀体.SLDPRT",
+    "face_count": 515,
+    "kinds": "YPPPTPPYYPPYYYYYYCPYTPPTYPCPPTPYPYPTCYTPYPYPYPCYPPPPPPPPPPYPPYPCYYYYCYCYCYCYYYYYYYYYCYCYCYCYYYYYYYYYCYCYCYCYYYYYYYYYCYCYCYCYYYYYYYOOYYYYYYYYYYYSOYSYSOSYYSOYSYSOSYOOTOOOOOTOOOTOOOOOTOOOPPPPPOOOPPOOYPPPPYOOOOOOOOOPYOOOOYOOOOYPPPPPPPPYPPPPYOPPPPPOPOOOOOOOPPYPOOOPOPOOOOOPOPPYPPPPPPPPPPPOOOPOOOOOPOOOYOOOOPPPPPPPOOYPPPPPPPPYPPPPYOPPPPPOPOOOOOOOPPYOOOOPOOPPPPPOOOYOOPPPOOYOPPPPOPPPPPPPPPPPOPPOPOOOOYOOOYPOOPOOPPYPOOPPPOOPPYYOPOOOOOOPOYOOOOYOOOOYOOOOYOOOOYOOOOYOOOPOOOOPOYPOOPOOPOPOOOOPOOOOPOYOPOPPPPPYOOOOOOOOYOOOOOOOOYY",
+    "kind_counts": [
+     "C=21",
+     "O=191",
+     "P=164",
+     "S=8",
+     "T=10",
+     "Y=121"
+    ]
+   },
+   {
+    "token": "04阀轴",
+    "file": "8“D94R3Y-CL600C-04阀轴.SLDPRT",
+    "face_count": 42,
+    "kinds": "YYYYPPCPYPYPPYPYPPPPPYPYPPYPYPPCYCYCCCCCCC",
+    "kind_counts": [
+     "C=10",
+     "P=18",
+     "Y=14"
+    ]
+   },
+   {
+    "token": "08大垫片",
+    "file": "8“D94R3Y-CL600C-08大垫片.SLDPRT",
+    "face_count": 4,
+    "kinds": "PPYC",
+    "kind_counts": [
+     "C=1",
+     "P=2",
+     "Y=1"
+    ]
+   },
+   {
+    "token": "09密封圈",
+    "file": "8“D94R3Y-CL600C-09密封圈.SLDPRT",
+    "face_count": 4,
+    "kinds": "PPYC",
+    "kind_counts": [
+     "C=1",
+     "P=2",
+     "Y=1"
+    ]
+   },
+   {
+    "token": "10压板",
+    "file": "8“D94R3Y-CL600C-10压板.SLDPRT",
+    "face_count": 41,
+    "kinds": "PCPYCYPYYPYYPYYPYYPYYPYYPYYPYYPYYPYYPYYPY",
+    "kind_counts": [
+     "C=2",
+     "P=14",
+     "Y=25"
+    ]
+   },
+   {
+    "token": "11蝶板",
+    "file": "8“D94R3Y-CL600C-11蝶板.SLDPRT",
+    "face_count": 55,
+    "kinds": "PYPYPCYCYCYCYCYCYCYCYCYCYCYCYCCCCPCCCCYPPYPPPPPYPYSYSCP",
+    "kind_counts": [
+     "C=21",
+     "P=13",
+     "S=2",
+     "Y=19"
+    ]
+   }
+  ]
+ }
 }
