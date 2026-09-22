@@ -165,31 +165,46 @@ def test_empty_folder_is_an_error(tmp_path, monkeypatch):
         B.collect_designs(None)
 
 
-# ---------------------------------------------------------------- 失败不停
+# ---------------------------------------------------------------- 失败之后停不停
 
 def test_a_failed_sample_does_not_stop_the_batch(monkeypatch):
-    """**失败就应该继续跑下一个** —— 这是定好的口径，不是可选项。
-
-    回归：这里曾经写成「连续 3 次失败就停」。实测失败率 82% 时
-    P(连续 3 次失败) ≈ 0.55，平均每 4~5 个样本就误停一次 ——
-    等于把「这个设计点造不出来」当成了「环境坏了」，批量根本跑不完。
-    """
+    """**默认口径是失败继续跑** —— 这是常态，不是例外。"""
     monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (True, "ok"))
-    stop, why = B.should_stop_after_failure()
-    assert stop is False, f"SolidWorks 还活着，就不该因为样本失败而停（{why}）"
+    stop, why = B.should_stop_after_failure(1, limit=B.DEFAULT_MAX_CONSECUTIVE_FAILURES)
+    assert stop is False, f"SolidWorks 还活着、又没到次数上限，就不该停（{why}）"
 
 
-def test_only_a_dead_solidworks_stops_the_batch(monkeypatch):
+def test_an_isolated_failure_never_stops_the_batch(monkeypatch):
+    """偶尔挂一个、后面又成功 —— 中间的单个失败不该累积成"要停"。"""
+    monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (True, "ok"))
+    for one_failure in (1, 2, 3):
+        assert B.should_stop_after_failure(one_failure, limit=8)[0] is False
+
+
+def test_a_dead_solidworks_stops_immediately_even_below_the_limit(monkeypatch):
+    """**探活是主判据**：SolidWorks 没了就该立刻停，不用等凑够次数。
+
+    这是"环境坏了"和"这个设计点造不出来"的区分点 —— 光看次数分不开，
+    探活能直接问出来。所以它优先于计数。
+    """
     monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (False, "MK_E_UNAVAILABLE"))
-    stop, why = B.should_stop_after_failure()
-    assert stop is True
-    assert "MK_E_UNAVAILABLE" in why, "停下时要带上原因，方便判断"
+    stop, why = B.should_stop_after_failure(1, limit=8)
+    assert stop is True, "才失败 1 次，但 SolidWorks 都没了 —— 该停"
+    assert "MK_E_UNAVAILABLE" in why, "停下时要带上原因"
 
 
-def test_the_batch_has_no_consecutive_failure_breaker():
-    """源码级守卫：别再把这个熔断加回来。"""
-    source = (MAPPING / "scripts" / "Run-Batch.py").read_text(encoding="utf-8")
-    assert "CONSECUTIVE_FAILURE_STOP" not in source
+def test_the_counter_stops_at_the_limit(monkeypatch):
+    """连续失败到上限就停 —— 兜底，防"原因各异但一直在倒"。"""
+    monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (True, "ok"))
+    assert B.should_stop_after_failure(7, limit=8)[0] is False, "差一次不该停"
+    stop, why = B.should_stop_after_failure(8, limit=8)
+    assert stop is True and "上限" in why
+
+
+def test_limit_zero_means_never_stop_for_counting(monkeypatch):
+    """`--max-consecutive-failures 0` = 只按探活停，不看次数。"""
+    monkeypatch.setattr(B.fses, "probe_alive", lambda *a, **k: (True, "ok"))
+    assert B.should_stop_after_failure(999, limit=0)[0] is False
 
 
 # ---------------------------------------------------------------- 真实数据（只验不变量）
